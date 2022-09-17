@@ -13,11 +13,12 @@ class Server
 
     interface iRotatable
     {
-        public void setAngel();
-        public void setAngelVelosity();
-        public void Rotate();
+        public void setAngel(double ang);
+        public double getAngel();
+        public void setAngelVelosity(double angvel);
+        public double getAngelVelosity();
     }
-    class Spaceship : iMovable
+    class Spaceship : iMovable, iRotatable
     {
 
         int[] position;
@@ -59,13 +60,21 @@ class Server
 
 
 
-        public void Rotate()
+        public void setAngel(double ang)
         {
-            angle += angleVelocity;
-            int oldVelocityX = velocity[0];
-
-            velocity[0] = (int)(oldVelocityX * Math.Cos(angleVelocity) - velocity[1] * Math.Sin(angleVelocity));
-            velocity[1] = (int)(oldVelocityX * Math.Sin(angleVelocity) + velocity[1] * Math.Cos(angleVelocity));
+            angle = ang;
+        }
+        public double getAngel()
+        {
+            return angle;
+        }
+        public void setAngelVelosity(double angvel)
+        {
+            angleVelocity = angvel;
+        }
+        public double getAngelVelosity()
+        {
+            return angleVelocity;
         }
 
         public override string ToString()
@@ -89,6 +98,19 @@ class Server
                 help[i] += a.getVelocity()[i];
             }
             a.setPosition(help);
+        }
+    }
+    class Rotating
+    {
+        public static void Rotate(iRotatable a)
+        {
+            int maxDirection = (int)(2 * Math.PI / a.getAngel()); //максимальное количество направлений;
+            // int velocityDirection = угловая скорость, выраженная в направлении
+            // direction = a.getAngel() + velocityDirection % maxDirection;
+            //int oldVelocityX = velocity[0];
+            // double alpha = Math.PI / maxDirection * direction 
+            // velocity[0] = Math.Round(oldVelocityX * Math.Cos(alpha) - velocity[1] * Math.Sin(alpha));
+            // velocity[1] = Math.Round(oldVelocityX * Math.Sin(alpha) + velocity[1] * Math.Cos(alpha));
         }
     }
     static void Main()
