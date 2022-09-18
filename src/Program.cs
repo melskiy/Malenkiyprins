@@ -1,12 +1,11 @@
-﻿using System;
+﻿namespace Game;
+using System;
 
-namespace ship
-{
+
     public interface iMovable
     {
         public void setPosition(int[] pos);
         public int[] getPosition();
-        public void setVeloсity(int[] vel);
         public int[] getVelocity();
 
     }
@@ -15,10 +14,9 @@ namespace ship
     {
         public void setAngel(double ang);
         public double getAngel();
-        public void setAngelVelosity(double angvel);
         public double getAngelVelosity();
     }
-    class Spaceship : iMovable, iRotatable
+    public class Spaceship : iMovable, iRotatable
     {
 
         int[] position;
@@ -42,10 +40,7 @@ namespace ship
         {
             return position;
         }
-        public void setVeloсity(int[] vel)
-        {
-            velocity = vel;
-        }
+       
         public int[] getVelocity()
         {
             return velocity;
@@ -60,10 +55,6 @@ namespace ship
         public double getAngel()
         {
             return angle;
-        }
-        public void setAngelVelosity(double angvel)
-        {
-            angleVelocity = angvel;
         }
         public double getAngelVelosity()
         {
@@ -81,7 +72,7 @@ namespace ship
             );
         }
     }
-    class Moving
+    public class Moving
     {
         public static void Move(iMovable a)
         {
@@ -134,4 +125,3 @@ namespace ship
             Console.WriteLine(spaceship.ToString());
         }
     }
-}

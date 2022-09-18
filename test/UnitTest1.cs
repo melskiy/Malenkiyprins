@@ -1,11 +1,9 @@
-using Xunit;
-using System;
-using ship;
-namespace test
+
+namespace Game.Tests;
+
+public class UnitTest1
 {
-    public class Movetest
-    {
-        [Fact]
+   [Fact]
         public void Mov()
         {
 
@@ -79,4 +77,5 @@ namespace test
 
         }
     }
-}
+
+
