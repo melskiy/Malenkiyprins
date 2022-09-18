@@ -1,9 +1,8 @@
 
 using System;
+namespace ship{
 
-class Server
-{
-    interface iMovable
+    public interface iMovable
     {
         public void setPosition(int[] pos);
         public int[] getPosition();
@@ -80,7 +79,7 @@ class Server
             );
         }
     }
-    class Moving
+    public class Moving
     {
         public static void Move(iMovable a)
         {
@@ -92,7 +91,8 @@ class Server
             a.setPosition(help);
         }
     }
-    static void Main()
+    public class Server{
+    public static void Main()
     {
         var spaceship = new Spaceship(
             new int[] { 100, 100 },
@@ -105,6 +105,7 @@ class Server
 
         Console.WriteLine(spaceship.ToString());
     }
+    }
+
+
 }
-
-
