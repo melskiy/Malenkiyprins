@@ -15,8 +15,6 @@ namespace ship
     {
         public void setAngel(double ang);
         public double getAngel();
-        public void setPosition(int[] pos);
-        public int[] getPosition();
         public void setAngelVelosity(double angvel);
         public double getAngelVelosity();
     }
@@ -32,13 +30,6 @@ namespace ship
         {
             this.position = position;
             this.velocity = velocity;
-
-            if (position.Length != velocity.Length)
-            {
-                throw new ArgumentException("Не совпадают размерности векторов position и velocity");
-            }
-
-
             this.angleVelocity = angleVelocity;
             this.angle = angle;
         }
@@ -94,6 +85,11 @@ namespace ship
     {
         public static void Move(iMovable a)
         {
+            
+            if (a.getPosition().Length != a.getVelocity().Length)
+            {
+                throw new ArgumentException("Не совпадают размерности векторов position и velocity");
+            }
             int[] help = a.getPosition();
             for (int i = 0; i < help.Length; i++)
             {
@@ -108,7 +104,7 @@ namespace ship
         {
             // double xnew = a.getPosition()[0] * Math.Cos(a.getAngel()) - a.getPosition()[1] * Math.Sin(a.getAngel());
             // double ynew = a.getPosition()[0] * Math.Sin(a.getAngel()) + a.getPosition()[1] * Math.Cos(a.getAngel());
-            double newangle = (a.getAngel() + a.getAngelVelosity());
+            double newangle = (a.getAngel() + a.getAngelVelosity()) % 360;
             a.setAngel(newangle);
             // int maxDirections = (int) (2 * Math.PI / (a.getAngel() * 180 / Math.PI)); //максимальное количество направлений;
             // int velocityDirection = 1;//угловая скорость, выраженная в направлении
@@ -126,10 +122,10 @@ namespace ship
         static void Main()
         {
             var spaceship = new Spaceship(
-                new int[] { 100, 100 },
-                new int[] { 2, 0 },
-                0,
-                Math.PI / 4
+                new int[] { 12, 5 },
+                new int[] { -7, 3 },
+                45,
+                90 
             );
 
             Moving.Move(spaceship);
