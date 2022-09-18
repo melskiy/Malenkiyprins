@@ -15,9 +15,9 @@ namespace test
                 0,
                 Math.PI / 4
             );
-
+            string exepted1 = "Не совпадают размерности векторов position и velocity";
             ArgumentException exepted = Assert.Throws<ArgumentException>(() => Moving.Move(spaceship));
-            Assert.Equal(exepted.Message, "Не совпадают размерности векторов position и velocity");
+            Assert.Equal(exepted1,exepted.Message);
 
 
         }
@@ -31,7 +31,7 @@ namespace test
                 0,
                 Math.PI / 4
             );
-
+            Moving.Move(spaceship);
         }
         [Fact]
         public void Mov2()
@@ -43,9 +43,9 @@ namespace test
                 0,
                 Math.PI / 4
             );
-
+            string exepted1 = "Не совпадают размерности векторов position и velocity";
             ArgumentException exepted = Assert.Throws<ArgumentException>(() => Moving.Move(spaceship));
-            Assert.Equal(exepted.Message, "Не совпадают размерности векторов position и velocity");
+            Assert.Equal(exepted.Message, exepted1);
 
 
         }
@@ -59,9 +59,9 @@ namespace test
                 0,
                 Math.PI / 4
             );
-
+            string exepted1 = "Не совпадают размерности векторов position и velocity";
             ArgumentException exepted = Assert.Throws<ArgumentException>(() => Moving.Move(spaceship));
-            Assert.Equal(exepted.Message, "Не совпадают размерности векторов position и velocity");
+            Assert.Equal(exepted.Message, exepted1);
 
 
         }
@@ -75,9 +75,6 @@ namespace test
                 45,
                 90
             );
-
-            ArgumentException exepted = Assert.Throws<ArgumentException>(() => Moving.Move(spaceship));
-            Assert.Equal(exepted.Message, "Не совпадают размерности векторов position и velocity");
 
 
         }
