@@ -30,6 +30,7 @@ public class UnitTest1
                 Math.PI / 4
             );
             Moving.Move(spaceship);
+            spaceship.ToString();
         }
         [Fact]
         public void Mov2()
@@ -73,7 +74,7 @@ public class UnitTest1
                 45,
                 90
             );
-
+            Rotating.Rotate(spaceship);
 
         }
     }
