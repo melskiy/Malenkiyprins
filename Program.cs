@@ -15,6 +15,8 @@ class Server
     {
         public void setAngel(double ang);
         public double getAngel();
+        public void setPosition(int[] pos);
+        public int[] getPosition();
         public void setAngelVelosity(double angvel);
         public double getAngelVelosity();
     }
@@ -79,7 +81,7 @@ class Server
 
         public override string ToString()
         {
-            return String.Format("Vector{{'velocity': ({0}, {1}),  'angle': {2}}}",
+            return String.Format("Vector{{'position': ({0}, {1}),  'angle': {2}}}",
                 // velocity[0].ToString(),
                 // velocity[1].ToString(),
                 position[0].ToString(),
@@ -104,11 +106,17 @@ class Server
     {
         public static void Rotate(iRotatable a)
         {
-            int maxDirection = (int)(2 * Math.PI / a.getAngel()); //максимальное количество направлений;
-            // int velocityDirection = угловая скорость, выраженная в направлении
-            // direction = a.getAngel() + velocityDirection % maxDirection;
-            //int oldVelocityX = velocity[0];
-            // double alpha = Math.PI / maxDirection * direction 
+            // double xnew = a.getPosition()[0] * Math.Cos(a.getAngel()) - a.getPosition()[1] * Math.Sin(a.getAngel());
+            // double ynew = a.getPosition()[0] * Math.Sin(a.getAngel()) + a.getPosition()[1] * Math.Cos(a.getAngel());
+            double newangle = (a.getAngel() + a.getAngelVelosity());
+            a.setAngel(newangle);
+            // int maxDirections = (int) (2 * Math.PI / (a.getAngel() * 180 / Math.PI)); //максимальное количество направлений;
+            // int velocityDirection = 1;//угловая скорость, выраженная в направлении
+            // double rotate;
+            // int direction = 0;
+            // rotate = (direction + velocityDirection) % maxDirections;
+            // int oldVelocityX = velocity[0];
+            // double alpha = Math.PI / maxDirections * direction;
             // velocity[0] = Math.Round(oldVelocityX * Math.Cos(alpha) - velocity[1] * Math.Sin(alpha));
             // velocity[1] = Math.Round(oldVelocityX * Math.Sin(alpha) + velocity[1] * Math.Cos(alpha));
         }
@@ -123,6 +131,7 @@ class Server
         );
 
         Moving.Move(spaceship);
+        Rotating.Rotate(spaceship);
 
         Console.WriteLine(spaceship.ToString());
     }
