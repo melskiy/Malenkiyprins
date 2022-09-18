@@ -1,8 +1,8 @@
 ﻿using System;
 
-class Server
+namespace ship
 {
-    interface iMovable
+    public interface iMovable
     {
         public void setPosition(int[] pos);
         public int[] getPosition();
@@ -11,7 +11,7 @@ class Server
 
     }
 
-    interface iRotatable
+    public interface iRotatable
     {
         public void setAngel(double ang);
         public double getAngel();
@@ -102,7 +102,7 @@ class Server
             a.setPosition(help);
         }
     }
-    class Rotating
+    public class Rotating
     {
         public static void Rotate(iRotatable a)
         {
@@ -121,19 +121,21 @@ class Server
             // velocity[1] = Math.Round(oldVelocityX * Math.Sin(alpha) + velocity[1] * Math.Cos(alpha));
         }
     }
-    static void Main()
+    class Server
     {
-        var spaceship = new Spaceship(
-            new int[] { 100, 100 },
-            new int[] { 2, 0 },
-            0,
-            Math.PI / 4
-        );
+        static void Main()
+        {
+            var spaceship = new Spaceship(
+                new int[] { 100, 100 },
+                new int[] { 2, 0 },
+                0,
+                Math.PI / 4
+            );
 
-        Moving.Move(spaceship);
-        Rotating.Rotate(spaceship);
+            Moving.Move(spaceship);
+            Rotating.Rotate(spaceship);
 
-        Console.WriteLine(spaceship.ToString());
+            Console.WriteLine(spaceship.ToString());
+        }
     }
 }
-
