@@ -28,7 +28,7 @@ jobs:
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: ./test/coverage/ 
+          path: Malenkiyprins.test/coverage/ 
           gist-filename: code-coverage.json
           gist-id: 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
           gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}  
