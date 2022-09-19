@@ -21,4 +21,4 @@ jobs:
       - name: Build
         run: dotnet build ./src --configuration Release --no-restore
       - name: Test
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../coverage/lcov.info .\test --no-restore --verbosity normal
+        run: dotnet test .\test --no-restore --verbosity normal
