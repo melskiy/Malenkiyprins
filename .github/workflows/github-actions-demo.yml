@@ -22,7 +22,7 @@ jobs:
         run: dotnet build ./src --configuration Release --no-restore
       - name: Test
         run: dotnet test  -p:CollectCoverage=true -p:CoverletOutput=coverage/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal ./test
-      -name: Create Test Coverage Badge
+      - name: Create Test Coverage Badge
         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
         id: create_coverage_badge
         with:
