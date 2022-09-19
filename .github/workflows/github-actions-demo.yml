@@ -28,6 +28,6 @@ jobs:
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: Malenkiyprins/test/coverage/coverage.opencover.xml      
+          path: ./test      
       - name: Print code coverage
         run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
