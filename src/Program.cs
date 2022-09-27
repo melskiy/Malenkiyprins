@@ -11,9 +11,11 @@ public interface iMovable
 
 public interface iRotatable
 {
-    public void setAngel(double ang);
-    public double getAngel();
-    public double getAngelVelosity();
+    public void setAngle(double ang);
+    public double getAngle();
+    public double getAngleVelosity();
+    public int[] getVelocity();
+    public void setVelosity(int[] vel);
 }
 public class Spaceship : iMovable, iRotatable
 {
@@ -44,27 +46,28 @@ public class Spaceship : iMovable, iRotatable
     {
         return velocity;
     }
-
-
-
-    public void setAngel(double ang)
+    public void setVelosity(int[] vel)
+    {
+        velocity = vel;
+    }
+    public void setAngle(double ang)
     {
         angle = ang;
     }
-    public double getAngel()
+    public double getAngle()
     {
         return angle;
     }
-    public double getAngelVelosity()
+    public double getAngleVelosity()
     {
         return angleVelocity;
     }
 
     public override string ToString()
     {
-        return String.Format("Vector{{'position': ({0}, {1}),  'angle': {2}}}",
-            // velocity[0].ToString(),
-            // velocity[1].ToString(),
+        return String.Format("Vector{{'velocity': ({0}, {1}), 'position': ({2}, {3}),  'angle': {4}}}",
+            velocity[0].ToString(),
+            velocity[1].ToString(),
             position[0].ToString(),
             position[1].ToString(),
             angle.ToString()
@@ -92,18 +95,24 @@ public class Rotating
 {
     public static void Rotate(iRotatable a)
     {
-        // double xnew = a.getPosition()[0] * Math.Cos(a.getAngel()) - a.getPosition()[1] * Math.Sin(a.getAngel());
-        // double ynew = a.getPosition()[0] * Math.Sin(a.getAngel()) + a.getPosition()[1] * Math.Cos(a.getAngel());
-        double newangle = (a.getAngel() + a.getAngelVelosity()) % 360;
-        a.setAngel(newangle);
+        double newangle = (a.getAngle() + a.getAngleVelosity()) % 360;
+        a.setAngle(newangle);
+
+        // int xnew = (int)(a.getPosition()[0] * Math.Cos(a.getAngel()) - a.getPosition()[1] * Math.Sin(a.getAngel()));
+        // int ynew = (int)(a.getPosition()[0] * Math.Sin(a.getAngel()) + a.getPosition()[1] * Math.Cos(a.getAngel()));
+        // int[] v = {xnew, ynew};
+        // a.setVelocity(v);
+
         // int maxDirections = (int) (2 * Math.PI / (a.getAngel() * 180 / Math.PI)); //максимальное количество направлений;
         // int velocityDirection = 1;//угловая скорость, выраженная в направлении
         // double rotate;
         // int direction = 0;
         // rotate = (direction + velocityDirection) % maxDirections;
-        // int oldVelocityX = velocity[0];
         // double alpha = Math.PI / maxDirections * direction;
-        // velocity[0] = Math.Round(oldVelocityX * Math.Cos(alpha) - velocity[1] * Math.Sin(alpha));
-        // velocity[1] = Math.Round(oldVelocityX * Math.Sin(alpha) + velocity[1] * Math.Cos(alpha));
+
+        int xnew = (int)(a.getVelocity()[0] * Math.Cos(a.getAngleVelosity()) - a.getVelocity()[1] * Math.Sin(a.getAngleVelosity()));
+        int ynew = (int)(a.getVelocity()[0] * Math.Sin(a.getAngleVelosity()) + a.getVelocity()[1] * Math.Cos(a.getAngleVelosity()));
+        int[] v = { xnew, ynew };
+        a.setVelosity(v);
     }
 }
