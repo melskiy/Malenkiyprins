@@ -16,6 +16,7 @@ public interface iRotatable
     public double getAngleVelosity();
     public int[] getVelocity();
     public void setVelosity(int[] vel);
+    public int[] getPosition();
 }
 public class Spaceship : iMovable, iRotatable
 {
@@ -97,11 +98,13 @@ public class Rotating
     {
         double newangle = (a.getAngle() + a.getAngleVelosity()) % 360;
         a.setAngle(newangle);
+        double angleRadian = a.getAngleVelosity() * Math.PI / 180;
+        
 
-        // int xnew = (int)(a.getPosition()[0] * Math.Cos(a.getAngel()) - a.getPosition()[1] * Math.Sin(a.getAngel()));
-        // int ynew = (int)(a.getPosition()[0] * Math.Sin(a.getAngel()) + a.getPosition()[1] * Math.Cos(a.getAngel()));
-        // int[] v = {xnew, ynew};
-        // a.setVelocity(v);
+        int xnew = (int)(a.getPosition()[0] * Math.Cos(angleRadian) - a.getPosition()[1] * Math.Sin(angleRadian));
+        int ynew = (int)(a.getPosition()[0] * Math.Sin(angleRadian) + a.getPosition()[1] * Math.Cos(angleRadian));
+        int[] v = {xnew, ynew};
+        a.setVelosity(v);
 
         // int maxDirections = (int) (2 * Math.PI / (a.getAngel() * 180 / Math.PI)); //максимальное количество направлений;
         // int velocityDirection = 1;//угловая скорость, выраженная в направлении
@@ -110,9 +113,11 @@ public class Rotating
         // rotate = (direction + velocityDirection) % maxDirections;
         // double alpha = Math.PI / maxDirections * direction;
 
-        int xnew = (int)(a.getVelocity()[0] * Math.Cos(a.getAngleVelosity()) - a.getVelocity()[1] * Math.Sin(a.getAngleVelosity()));
-        int ynew = (int)(a.getVelocity()[0] * Math.Sin(a.getAngleVelosity()) + a.getVelocity()[1] * Math.Cos(a.getAngleVelosity()));
-        int[] v = { xnew, ynew };
-        a.setVelosity(v);
+        // int xnew = (int)(a.getVelocity()[0] * Math.Cos(a.getAngle()) - a.getVelocity()[1] * Math.Sin(a.getAngle()));
+        // int ynew = (int)(a.getVelocity()[0] * Math.Sin(a.getAngle()) + a.getVelocity()[1] * Math.Cos(a.getAngle()));
+        // int[] v = { xnew, ynew };
+        // a.setVelosity(v);
+       
+       
     }
 }
