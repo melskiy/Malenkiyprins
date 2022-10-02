@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="49" visitedSequencePoints="49" numBranchPoints="4" visitedBranchPoints="4" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="13" minCyclomaticComplexity="13" visitedClasses="3" numClasses="3" visitedMethods="10" numMethods="10" />
   <Modules>
-    <Module hash="8FB95CC9-27EC-4A82-9D9F-C32D00AEF44A">
+    <Module hash="339828D5-17D3-4A78-A535-6AF96B249650">
       <ModulePath>Game.dll</ModulePath>
-      <ModuleTime>2022-09-27T05:08:49</ModuleTime>
+      <ModuleTime>2022-09-29T08:29:33</ModuleTime>
       <ModuleName>Game</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\usern\OneDrive\Рабочий стол\Malenkiyprins\src\Program.cs" />
