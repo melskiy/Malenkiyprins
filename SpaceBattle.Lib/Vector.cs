@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+namespace SpaceBattle.Lib;
 public class Vector
 {
     private int[] nums;
@@ -77,9 +78,7 @@ public class Vector
     }
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals(obj, null)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        throw new NotImplementedException();
+        return obj is Vector v && nums.SequenceEqual(v.nums);
     }
     public override int GetHashCode()
     {
