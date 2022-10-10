@@ -1,5 +1,5 @@
 namespace SpaceBattle.Lib.Test;
-public class UnitTest1
+public class MoveCommandTest
 {
     [Fact]
     public void MoveCommandTestPositive()
@@ -10,5 +10,18 @@ public class UnitTest1
         var c = new MoveCommand(movable.Object);
         c.Execute();
         movable.VerifySet(i=>i.Position = new Vector(5, 8), Times.Once);
+    }
+}
+public class RotateCommandTest
+{
+    [Fact]
+    public void RotateCommandTestPositive()
+    {
+        var movable = new Mock<IRotatable>();
+        movable.Setup(i=>i.Angle).Returns(45).Verifiable();
+        movable.Setup(i=>i.AngleVelocity).Returns(90).Verifiable();
+        var c = new RotateCommand(movable.Object);
+        c.Execute();
+        movable.VerifySet(i=>i.Angle = 135, Times.Once);
     }
 }
