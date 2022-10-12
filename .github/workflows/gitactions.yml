@@ -22,15 +22,5 @@ jobs:
         run: dotnet build ./SpaceBattle.Lib --configuration Release --no-restore
       - name: Test
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=../coverage/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal ./SpaceBattle.Lib.Test
-      - name: Create Test Coverage Badge
-        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
-        id: create_coverage_badge
-        with:
-          label: Unit Test Coverage
-          color: brightgreen
-          path: coverage\coverage.opencover.xml
-          gist-filename: code-coverage.json
-          gist-id: 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
-          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}
-      - name: Print code coverage
-        run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
+      - name: Codecov
+        uses: codecov/codecov-action@v1
