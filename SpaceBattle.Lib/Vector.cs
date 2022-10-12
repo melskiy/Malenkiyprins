@@ -1,5 +1,7 @@
 using System.Runtime.CompilerServices;
 namespace SpaceBattle.Lib;
+using System.Diagnostics.CodeAnalysis;
+[ExcludeFromCodeCoverage]
 public class Vector
 {
     private int[] nums;

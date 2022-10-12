@@ -1,0 +1,33 @@
+name: dotnet package
+ 
+on: [push]
+ 
+jobs:
+  build:
+ 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ['6.0.x' ]
+ 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        run: dotnet restore ./SpaceBattle.Lib
+      - name: Build
+        run: dotnet build ./SpaceBattle.Lib --configuration Release --no-restore
+      - name: Test
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=coverage/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal 
+      - name: Create Test Coverage Badge
+        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+        id: create_coverage_badge
+        with:
+          label: Unit Test Coverage
+          color: brightgreen
+          path: SpaceBattle.Lib.Test\coverage\coverage.opencover.xml
+      - name: Print code coverage
+        run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"

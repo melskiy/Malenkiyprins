@@ -17,12 +17,12 @@ public interface IMovable
 }
 public interface IRotatable
 {
-    public double Angle 
+    public int Angle 
     {
         get;
         set;
     }
-    public double AngleVelocity 
+    public int AngleVelocity 
     {
         get;
     }

@@ -4,12 +4,46 @@ public class MoveCommandTest
     [Fact]
     public void MoveCommandTestPositive()
     {
-        var movable = new Mock<IMovable>();
-        movable.Setup(i=>i.Position).Returns(new Vector(12, 5)).Verifiable();
-        movable.Setup(i=>i.Velocity).Returns(new Vector(-7, 3)).Verifiable();
-        var c = new MoveCommand(movable.Object);
-        c.Execute();
-        movable.VerifySet(i=>i.Position = new Vector(5, 8), Times.Once);
+        Mock<IMovable> movable = new Mock<IMovable>();
+        movable.SetupProperty(i => i.Position, new Vector(12,5));
+        movable.SetupGet<Vector>(i => i.Velocity).Returns(new Vector(-7,3));
+        MoveCommand command = new MoveCommand(movable.Object);
+        command.Execute();
+        Assert.Equal(new Vector(5,8), movable.Object.Position);
+
+    }
+    [Fact]
+     public void MoveCommandTestNegative1()
+    {
+        Mock<IMovable> movable = new Mock<IMovable>();
+        movable.SetupProperty(i => i.Position, new Vector(12,5));
+        movable.SetupGet<Vector>(i => i.Velocity).Throws<ArgumentException>();
+        MoveCommand command = new MoveCommand(movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
+    }
+
+    [Fact]
+     public void MoveCommandTestNegative2()
+    {
+        Mock<IMovable> movable = new Mock<IMovable>();
+        movable.SetupProperty(i => i.Position, new Vector(12,5));
+        movable.SetupGet<Vector>(i => i.Position).Throws<ArgumentException>();
+        movable.SetupGet<Vector>(i => i.Velocity).Returns(new Vector(-7,3));
+        MoveCommand command = new MoveCommand(movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
+    }
+    [Fact]
+     public void MoveCommandTestNegative3()
+    {
+        Mock<IMovable> movable = new Mock<IMovable>();
+        movable.SetupProperty(i => i.Position, new Vector(12,5));
+        movable.SetupSet(i => i.Position = It.IsAny<Vector> ()).Throws<ArgumentException>();
+        movable.SetupGet<Vector>(i => i.Velocity).Returns(new Vector(-7,3));
+        MoveCommand command = new MoveCommand(movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
     }
 }
 public class RotateCommandTest
@@ -17,11 +51,45 @@ public class RotateCommandTest
     [Fact]
     public void RotateCommandTestPositive()
     {
-        var movable = new Mock<IRotatable>();
-        movable.Setup(i=>i.Angle).Returns(45).Verifiable();
-        movable.Setup(i=>i.AngleVelocity).Returns(90).Verifiable();
-        var c = new RotateCommand(movable.Object);
-        c.Execute();
-        movable.VerifySet(i=>i.Angle = 135, Times.Once);
+        Mock<IRotatable> movable = new Mock<IRotatable>();
+        movable.SetupProperty(i => i.Angle, 45);
+        movable.SetupGet<int>(i => i.AngleVelocity).Returns(90);
+        RotateCommand command = new RotateCommand(movable.Object);
+        command.Execute();
+        Assert.Equal(135, movable.Object.Angle);
+
+    }
+    [Fact]
+     public void RotateCommandTestNegative1()
+    {
+        Mock<IRotatable> movable = new Mock<IRotatable>();
+        movable.SetupProperty(i => i.Angle, 45);
+        movable.SetupGet<int>(i => i.AngleVelocity).Throws<ArgumentException>();
+        RotateCommand command = new RotateCommand(movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
+    }
+
+    [Fact]
+     public void RotateCommandTestNegative2()
+    {
+        Mock<IRotatable> movable = new Mock<IRotatable>();
+        movable.SetupProperty(i => i.Angle, 45);
+        movable.SetupGet<int>(i => i.Angle).Throws<ArgumentException>();
+        movable.SetupGet<int>(i => i.AngleVelocity).Returns(90);
+        RotateCommand command = new RotateCommand (movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
+    }
+    [Fact]
+     public void RotateCommandTestNegative3()
+    {
+        Mock<IRotatable> movable = new Mock<IRotatable>();
+        movable.SetupProperty(i => i.Angle, 45);
+        movable.SetupSet(i => i.Angle = It.IsAny<int> ()).Throws<ArgumentException>();
+        movable.SetupGet<int>(i => i.AngleVelocity).Returns(90);
+        RotateCommand command = new RotateCommand(movable.Object);
+        Assert.Throws<ArgumentException>(() => command.Execute());
+
     }
 }
