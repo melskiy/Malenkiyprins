@@ -1,7 +1,4 @@
-using System.Runtime.CompilerServices;
 namespace SpaceBattle.Lib;
-using System.Diagnostics.CodeAnalysis;
-[ExcludeFromCodeCoverage]
 public class Vector
 {
     private int[] nums;
@@ -23,7 +20,6 @@ public class Vector
         set => this.nums[key] = value;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector operator +(Vector v1, Vector v2)
     {
         if (v1.Size != v2.Size)
