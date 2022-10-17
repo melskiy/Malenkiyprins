@@ -7,8 +7,11 @@ public class AngleTest
         Angle a = new Angle(1, 5);
         Angle b = new Angle(4, 3);
         Angle c = new Angle(3, 9);
+        Angle d = new Angle(3, 5);
         Assert.Equal(new Angle(23, 15), a + b);
         Assert.Equal(new Angle(4, 9), c + b);
+        Assert.Equal(new Angle(4, 9),b+c);
+        Assert.Equal(new Angle(29, 15),b+d);
     }
     [Fact]
     public void AngleTestEqual()
@@ -35,10 +38,18 @@ public class AngleTest
         Angle a = new Angle(45, 1);
         Assert.Equal("45 / 1", a.ToString());
     }
+    [Fact]
     public void GetHashCodeTest()
     {
         Angle a = new Angle(1, 2);
         Angle b = new Angle(1, 2);
         Assert.Equal(a.GetHashCode(), b.GetHashCode());
+    }
+    [Fact]
+    public void EqvalsNegativeTest()
+    {
+        Angle a = new Angle(1, 2);
+        int b = 3;
+        Assert.False(a.Equals(b));
     }
 };

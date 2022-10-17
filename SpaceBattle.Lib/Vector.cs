@@ -57,8 +57,6 @@ public class Vector
         return obj is Vector v && nums.SequenceEqual(v.nums);
     }
 
-    public override int GetHashCode()
-    {
-        return HashCode.nums;
-    }
+     public override int GetHashCode() =>
+        nums.Aggregate(0, (total, next) => HashCode.Combine(total, next));
 }

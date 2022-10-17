@@ -25,7 +25,7 @@ public class Angle
             {
                 return y2;
             }
-            else if ((y1 > y2) && (y1 % y2 == 0))
+            if ((y1 >= y2) && (y1 % y2 == 0))
             {
                 return y1;
             }
