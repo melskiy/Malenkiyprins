@@ -24,3 +24,5 @@ jobs:
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=../coverage/ -p:CoverletOutputFormat=opencover --no-build --verbosity d ./SpaceBattle.Lib.Test
       - name: Codecov
         uses: codecov/codecov-action@v3
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.1.1
