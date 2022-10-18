@@ -17,7 +17,17 @@ public class Angle
     {
         return $"{this.numerator} / {this.denominator}";
     }
-    public static int SCD(int a, int b) { return b == 0 ? a : SCD(b, a % b);}
+    public static int SCD(int a, int b)
+    {
+        if (a == 0) return b;
+        if (b == 0) return a;
+        if (a == b) return a;
+        if (a == 1 || b == 1) return 1;
+        if ((a % 2 == 0) && (b % 2 == 0)) return 2 * SCD(a / 2, b / 2);
+        if ((a % 2 == 0) && (b % 2 != 0)) return SCD(a / 2, b);
+        if ((a % 2 != 0) && (b % 2 == 0)) return SCD(a, b / 2);
+        return SCD(b, Math.Abs(a - b));
+    }
     public static Angle operator +(Angle a1, Angle a2)
     {
         int y3 = SCD(a1.numerator * a2.denominator + a2.numerator * a1.denominator, a1.denominator * a2.denominator);
