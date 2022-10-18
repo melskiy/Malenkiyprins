@@ -38,7 +38,12 @@ public class Angle
     {
         return !(a1 == a2);
     }
-    public override bool Equals(object? obj) => obj is Angle a && numerator == a.numerator && denominator == a.denominator;
+    public override bool Equals(object? obj) {
+        return obj is Angle a &&
+         numerator == a.numerator && 
+         denominator == a.denominator;
+    }
+    
 
     public override int GetHashCode()
     {

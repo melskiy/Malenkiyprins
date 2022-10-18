@@ -49,7 +49,10 @@ public class AngleTest
     public void EqvalsNegativeTest()
     {
         Angle a = new Angle(1, 2);
+        Angle c = new Angle(2, 1);
         int b = 3;
         Assert.False(a.Equals(b));
+        Assert.False(a.Equals(c));
     }
+    
 };
