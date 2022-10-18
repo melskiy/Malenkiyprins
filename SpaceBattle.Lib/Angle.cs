@@ -1,12 +1,12 @@
 namespace SpaceBattle.Lib;
 public class Angle
-{
+{   
     public static int SCD(int a, int b)
     {
         return b == 0 ? a : SCD(b, a % b);
     }
-    private int numerator;
-    private int denominator;
+    public int numerator;
+    public int denominator;
     public Angle(int n, int d)
     {
         this.numerator = n;
@@ -43,8 +43,6 @@ public class Angle
          numerator == a.numerator && 
          denominator == a.denominator;
     }
-    
-
     public override int GetHashCode()
     {
         return HashCode.Combine(numerator, denominator);
