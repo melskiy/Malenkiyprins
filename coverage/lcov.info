@@ -1,4 +1,4 @@
-SF:C:\Users\malya\Desktop\Malenkiyprins\SpaceBattle.Lib\Angle.cs
+SF:C:\Users\usern\OneDrive\Рабочий стол\Malenkiyprins1\SpaceBattle.Lib\Angle.cs
 FN:15,System.String SpaceBattle.Lib.Angle::ToString()
 FNDA:1,System.String SpaceBattle.Lib.Angle::ToString()
 DA:16,1
@@ -7,64 +7,45 @@ DA:18,1
 FN:20,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:6,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 DA:21,6
-DA:34,6
-DA:35,6
-DA:36,4
-DA:37,4
-DA:39,2
-DA:40,6
-BRDA:35,27,0,3
-BRDA:35,27,1,3
-BRDA:35,43,0,4
-BRDA:35,43,1,2
-FN:41,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
+DA:26,6
+DA:27,6
+DA:28,6
+FN:29,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:2,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
-DA:42,2
-DA:43,2
-DA:44,1
-DA:45,1
-DA:47,1
-DA:48,2
-BRDA:43,13,0,1
-BRDA:43,13,1,1
-BRDA:43,37,0,1
-BRDA:43,37,1,1
-FN:49,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
+DA:30,2
+DA:31,2
+DA:32,1
+DA:33,1
+DA:35,1
+DA:36,2
+BRDA:31,13,0,1
+BRDA:31,13,1,1
+BRDA:31,37,0,1
+BRDA:31,37,1,1
+FN:37,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:1,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
-DA:50,1
-DA:51,1
-DA:52,1
-FN:52,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
+DA:38,1
+DA:39,1
+DA:40,1
+FN:40,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
 FNDA:6,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
-DA:53,6
-BRDA:53,8,0,5
-BRDA:53,22,0,5
-BRDA:53,8,1,1
-BRDA:53,22,1,1
-FN:55,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
+DA:41,6
+BRDA:41,8,0,5
+BRDA:41,22,0,5
+BRDA:41,8,1,1
+BRDA:41,22,1,1
+FN:43,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
 FNDA:2,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
-DA:56,2
-DA:57,2
-DA:58,2
-FN:22,System.Int32 SpaceBattle.Lib.Angle::<op_Addition>g__Znamen|4_0(System.Int32,System.Int32)
-FNDA:6,System.Int32 SpaceBattle.Lib.Angle::<op_Addition>g__Znamen|4_0(System.Int32,System.Int32)
-DA:23,6
-DA:24,6
-DA:25,3
-DA:26,3
-DA:28,3
-DA:29,1
-DA:30,1
-DA:32,2
-DA:33,6
-BRDA:24,3,0,4
-BRDA:24,3,1,2
-BRDA:24,16,0,3
-BRDA:24,16,1,3
-BRDA:28,25,0,2
-BRDA:28,25,1,1
-BRDA:28,38,0,1
-BRDA:28,38,1,2
+DA:44,2
+DA:45,2
+DA:46,2
+FN:22,System.Int32 SpaceBattle.Lib.Angle::<op_Addition>g__GCD|4_0(System.Int32,System.Int32)
+FNDA:21,System.Int32 SpaceBattle.Lib.Angle::<op_Addition>g__GCD|4_0(System.Int32,System.Int32)
+DA:23,21
+DA:24,21
+DA:25,21
+BRDA:24,2,0,15
+BRDA:24,2,1,6
 FN:5,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
 FNDA:31,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
 DA:6,31
@@ -77,14 +58,14 @@ DA:12,1
 DA:14,30
 BRDA:10,28,0,1
 BRDA:10,28,1,30
-LF:40
-LH:40
-BRF:22
-BRH:22
+LF:31
+LH:31
+BRF:12
+BRH:12
 FNF:8
 FNH:8
 end_of_record
-SF:C:\Users\malya\Desktop\Malenkiyprins\SpaceBattle.Lib\Class1.cs
+SF:C:\Users\usern\OneDrive\Рабочий стол\Malenkiyprins1\SpaceBattle.Lib\Class1.cs
 FN:37,System.Void SpaceBattle.Lib.MoveCommand::Execute()
 FNDA:4,System.Void SpaceBattle.Lib.MoveCommand::Execute()
 DA:38,4
@@ -114,7 +95,7 @@ BRH:0
 FNF:4
 FNH:4
 end_of_record
-SF:C:\Users\malya\Desktop\Malenkiyprins\SpaceBattle.Lib\Vector.cs
+SF:C:\Users\usern\OneDrive\Рабочий стол\Malenkiyprins1\SpaceBattle.Lib\Vector.cs
 FN:6,System.Int32 SpaceBattle.Lib.Vector::get_Size()
 FNDA:30,System.Int32 SpaceBattle.Lib.Vector::get_Size()
 DA:7,30

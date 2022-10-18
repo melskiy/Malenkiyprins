@@ -9,9 +9,9 @@ public class AngleTest
         Angle c = new Angle(3, 9);
         Angle d = new Angle(3, 5);
         Assert.Equal(new Angle(23, 15), a + b);
-        Assert.Equal(new Angle(4, 9), c + b);
-        Assert.Equal(new Angle(4, 9),b+c);
-        Assert.Equal(new Angle(29, 15),b+d);
+        Assert.Equal(new Angle(5, 3), c + b);
+        Assert.Equal(new Angle(5, 3), b + c);
+        Assert.Equal(new Angle(29, 15), b + d);
     }
     [Fact]
     public void AngleTestEqual()

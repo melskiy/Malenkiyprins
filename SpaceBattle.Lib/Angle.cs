@@ -19,24 +19,12 @@ public class Angle
 
     public static Angle operator +(Angle a1, Angle a2)
     {
-        static int Znamen(int y1, int y2)
+        int GCD(int a, int b)
         {
-            if ((y2 >= y1) && (y2 % y1 == 0))
-            {
-                return y2;
-            }
-            if ((y1 >= y2) && (y1 % y2 == 0))
-            {
-                return y1;
-            }
-            return y2 * y1;
+            return b == 0 ? a : GCD(b, a % b);
         }
-        int y3 = Znamen(a1.denominator, a2.denominator);
-        if (y3 == a1.denominator || y3 == a2.denominator)
-        {
-            return new Angle(a1.numerator * (a2.denominator / y3) + a2.numerator * (a1.denominator / y3), y3);
-        }
-        return new Angle(a1.numerator * a2.denominator + a2.numerator * a1.denominator, y3);
+        int y3 = GCD(a1.numerator * a2.denominator + a2.numerator * a1.denominator, a1.denominator * a2.denominator);
+        return new Angle((a1.numerator * a2.denominator + a2.numerator * a1.denominator) / y3, a1.denominator * a2.denominator / y3);
     }
     public static bool operator ==(Angle a1, Angle a2)
     {
@@ -50,7 +38,7 @@ public class Angle
     {
         return !(a1 == a2);
     }
-    public override bool Equals(object? obj) => obj is Angle a  && numerator == a.numerator && denominator == a.denominator;
+    public override bool Equals(object? obj) => obj is Angle a && numerator == a.numerator && denominator == a.denominator;
 
     public override int GetHashCode()
     {
