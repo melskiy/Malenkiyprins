@@ -1,4 +1,5 @@
 namespace SpaceBattle.Lib;
+using System.Diagnostics.CodeAnalysis;
 public class Angle
 {
     private int numerator;
@@ -16,9 +17,9 @@ public class Angle
     {
         return $"{this.numerator} / {this.denominator}";
     }
-
     public static Angle operator +(Angle a1, Angle a2)
     {
+        [ExcludeFromCodeCoverage]
         int SCD(int a, int b)
         {
             while (a != b)
