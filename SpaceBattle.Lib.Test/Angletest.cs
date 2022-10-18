@@ -30,7 +30,9 @@ public class AngleTest
     {
         Angle a = new Angle(4, 3);
         Angle b = new Angle(4, 3);
+        Angle c = new Angle(1, 2);
         Assert.True(a == b);
+        Assert.False(a == c);
     }
     [Fact]
     public void VectorPositiveNotEqualsTest()

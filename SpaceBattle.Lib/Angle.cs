@@ -1,5 +1,4 @@
 namespace SpaceBattle.Lib;
-using System.Diagnostics.CodeAnalysis;
 public class Angle
 {
     private int numerator;
@@ -19,7 +18,6 @@ public class Angle
     }
     public static Angle operator +(Angle a1, Angle a2)
     {
-        [ExcludeFromCodeCoverage]
         int SCD(int a, int b)
         {
             while (a != b)
