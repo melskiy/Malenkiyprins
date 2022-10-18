@@ -18,14 +18,9 @@ public class Angle
         return $"{this.numerator} / {this.denominator}";
     }
     public static int SCD(int a, int b)
-        {
-            while (a != b)
-            {
-                if (a > b) a -= b;
-                else b -= a;
-            }
-            return b;
-        }
+    {
+        return b == 0 ? a : SCD(b, a % b);
+    }
     public static Angle operator +(Angle a1, Angle a2)
     {
         int y3 = SCD(a1.numerator * a2.denominator + a2.numerator * a1.denominator, a1.denominator * a2.denominator);
