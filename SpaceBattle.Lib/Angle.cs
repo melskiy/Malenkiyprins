@@ -1,4 +1,5 @@
 namespace SpaceBattle.Lib;
+
 public class Angle
 {
     private int numerator;
@@ -16,9 +17,7 @@ public class Angle
     {
         return $"{this.numerator} / {this.denominator}";
     }
-    public static Angle operator +(Angle a1, Angle a2)
-    {
-        int SCD(int a, int b)
+    public static int SCD(int a, int b)
         {
             while (a != b)
             {
@@ -27,6 +26,8 @@ public class Angle
             }
             return b;
         }
+    public static Angle operator +(Angle a1, Angle a2)
+    {
         int y3 = SCD(a1.numerator * a2.denominator + a2.numerator * a1.denominator, a1.denominator * a2.denominator);
         return new Angle((a1.numerator * a2.denominator + a2.numerator * a1.denominator) / y3, a1.denominator * a2.denominator / y3);
     }
