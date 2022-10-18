@@ -17,7 +17,7 @@ public class Angle
     {
         return $"{this.numerator} / {this.denominator}";
     }
-    public static int SCD(int a, int b)
+    static int SCD(int a, int b)
     {
         return b == 0 ? a : SCD(b, a % b);
     }
