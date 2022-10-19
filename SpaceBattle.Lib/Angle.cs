@@ -27,11 +27,7 @@ public class Angle
     }
     public static bool operator ==(Angle a1, Angle a2)
     {
-        if (a1.numerator != a2.numerator || a1.denominator != a2.denominator)
-        {
-            return false;
-        }
-        return true;
+        return a1.numerator != a2.numerator || a1.denominator != a2.denominator;
     }
     public static bool operator !=(Angle a1, Angle a2)
     {
