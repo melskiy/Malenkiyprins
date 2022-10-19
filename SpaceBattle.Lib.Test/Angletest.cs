@@ -58,7 +58,7 @@ public class AngleTest
     [Fact]
     public void DecTets()
     {
-        Assert.Equal(2, Angle.SCD(2, 2));
+        Assert.Equal(2, Angle.GCD(2, 2));
     }
 
 };
