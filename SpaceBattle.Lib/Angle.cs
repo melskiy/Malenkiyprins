@@ -1,7 +1,6 @@
 namespace SpaceBattle.Lib;
-
 public class Angle
-{   
+{
     public int numerator;
     public int denominator;
     public Angle(int n, int d)
@@ -38,9 +37,10 @@ public class Angle
     {
         return !(a1 == a2);
     }
-    public override bool Equals(object? obj) {
+    public override bool Equals(object? obj)
+    {
         return obj is Angle a &&
-         numerator == a.numerator && 
+         numerator == a.numerator &&
          denominator == a.denominator;
     }
     public override int GetHashCode()
