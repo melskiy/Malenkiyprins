@@ -12,6 +12,7 @@ public interface IRotatable
     }
 }
 
+
 public class RotateCommand: ICommand
 {
     private IRotatable obj;

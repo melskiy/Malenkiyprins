@@ -11,6 +11,8 @@ public interface IMovable
         get;
     }
 }
+
+
 public class MoveCommand: ICommand
 {
     private IMovable obj;
