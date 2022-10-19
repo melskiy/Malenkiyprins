@@ -17,19 +17,21 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        run: dotnet restore ./SpaceBattle.Lib
+        run: dotnet restore
       - name: Build
-        run: dotnet build ./SpaceBattle.Lib --configuration Release --no-restore
+        run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
       - name: Test
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=../coverage/ -p:CoverletOutputFormat=opencover --no-build --verbosity d ./SpaceBattle.Lib.Test
+        run: dotnet test --no-build --verbosity d -p:CollectCoverage=true -p:CoverletOutput=./coverage/coverage.opencover.xml -p:CoverletOutputFormat=opencover
       - name: Codecov
         uses: codecov/codecov-action@v3
+        with: 
+          files: SpaceBattle.Lib.Test/coverage/coverage.opencover.xml   
       - name: Create Test Coverage Badge
         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
         id: create_coverage_badge
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: coverage/coverage.opencover.xml     
+          path: SpaceBattle.Lib.Test/coverage/coverage.opencover.xml     
       - name: Print code coverage
         run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
