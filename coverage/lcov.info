@@ -5,12 +5,12 @@ DA:17,1
 DA:18,1
 DA:19,1
 FN:20,System.Int32 SpaceBattle.Lib.Angle::SCD(System.Int32,System.Int32)
-FNDA:21,System.Int32 SpaceBattle.Lib.Angle::SCD(System.Int32,System.Int32)
-DA:21,21
-DA:22,21
-DA:23,21
-BRDA:22,2,0,15
-BRDA:22,2,1,6
+FNDA:23,System.Int32 SpaceBattle.Lib.Angle::SCD(System.Int32,System.Int32)
+DA:21,23
+DA:22,23
+DA:23,23
+BRDA:22,2,0,16
+BRDA:22,2,1,7
 FN:24,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:6,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 DA:25,6
@@ -35,31 +35,35 @@ DA:38,1
 DA:39,1
 DA:40,1
 FN:40,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
-FNDA:6,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
-DA:41,6
-BRDA:41,8,0,5
-BRDA:41,22,0,5
-BRDA:41,8,1,1
-BRDA:41,22,1,1
-FN:43,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
+FNDA:7,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
+DA:41,7
+DA:42,7
+DA:43,7
+DA:44,7
+DA:45,7
+BRDA:42,9,0,6
+BRDA:42,23,0,5
+BRDA:42,9,1,2
+BRDA:42,23,1,2
+FN:46,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
 FNDA:2,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
-DA:44,2
-DA:45,2
-DA:46,2
+DA:47,2
+DA:48,2
+DA:49,2
 FN:6,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
-FNDA:31,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
-DA:7,31
-DA:8,31
-DA:9,31
-DA:10,31
-DA:11,31
+FNDA:32,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
+DA:7,32
+DA:8,32
+DA:9,32
+DA:10,32
+DA:11,32
 DA:12,1
 DA:13,1
-DA:15,30
+DA:15,31
 BRDA:11,28,0,1
-BRDA:11,28,1,30
-LF:31
-LH:31
+BRDA:11,28,1,31
+LF:35
+LH:35
 BRF:12
 BRH:12
 FNF:8
