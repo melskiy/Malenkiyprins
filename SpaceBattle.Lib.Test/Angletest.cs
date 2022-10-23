@@ -13,11 +13,13 @@ public class AngleTest
         Assert.Equal(new Angle(5, 3), b + c);
         Assert.Equal(new Angle(29, 15), b + d);
     }
+    
     [Fact]
     public void AngleTestEqual()
     {
         Assert.Throws<ArgumentException>(() => new Angle(1, 0));
     }
+
     [Fact]
     public void AngleEqualEqualTest()
     {
@@ -25,6 +27,7 @@ public class AngleTest
         Angle b = new Angle(4, 3);
         Assert.True(a != b);
     }
+
     [Fact]
     public void AngleNotEqualTest()
     {
@@ -33,12 +36,14 @@ public class AngleTest
         Assert.True(a == b);
 
     }
+
     [Fact]
     public void VectorPositiveNotEqualsTest()
     {
         Angle a = new Angle(45, 1);
         Assert.Equal("45 / 1", a.ToString());
     }
+
     [Fact]
     public void GetHashCodeTest()
     {
@@ -46,6 +51,7 @@ public class AngleTest
         Angle b = new Angle(1, 2);
         Assert.Equal(a.GetHashCode(), b.GetHashCode());
     }
+
     [Fact]
     public void EqvalsNegativeTest()
     {
@@ -55,6 +61,7 @@ public class AngleTest
         Assert.False(a.Equals(b));
         Assert.False(a.Equals(c));
     }
+
     [Fact]
     public void DecTets()
     {
