@@ -67,5 +67,4 @@ public class AngleTest
     {
         Assert.Equal(2, Angle.GCD(2, 2));
     }
-
 };
