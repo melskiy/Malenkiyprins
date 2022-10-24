@@ -67,4 +67,9 @@ public class AngleTest
     {
         Assert.Equal(2, Angle.GCD(2, 2));
     }
+<<<<<<< HEAD:SpaceBattle.Lib.Test/Angletest.cs
 };
+=======
+
+};
+>>>>>>> 4e6b53ca86f86abac59df7e9408c1bb6f051c7d1:SpaceBattle.Lib.Test/AngleTest.cs
