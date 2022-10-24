@@ -16,7 +16,7 @@ public class Angle
     {
         return $"{this.numerator} / {this.denominator}";
     }
-    public static int GCD(int a, int b)
+    private static int GCD(int a, int b)
     {
         return b == 0 ? a : GCD(b, a % b);
     }
