@@ -7,7 +7,7 @@ public interface ICommand
 
 public interface IMovable
 {
-    public Vector Position 
+    public Vector Position
     {
         get;
         set;
@@ -21,12 +21,12 @@ public interface IMovable
 
 public interface IRotatable
 {
-    public Angle Angle 
+    public Angle Angle
     {
         get;
         set;
     }
-    public Angle AngleVelocity 
+    public Angle AngleVelocity
     {
         get;
     }

@@ -13,7 +13,7 @@ public class AngleTest
         Assert.Equal(new Angle(5, 3), b + c);
         Assert.Equal(new Angle(29, 15), b + d);
     }
-    
+
     [Fact]
     public void AngleTestEqual()
     {
@@ -62,14 +62,6 @@ public class AngleTest
         Assert.False(a.Equals(c));
     }
 
-    [Fact]
-    public void DecTets()
-    {
-        Assert.Equal(2, Angle.GCD(2, 2));
-    }
-<<<<<<< HEAD:SpaceBattle.Lib.Test/Angletest.cs
 };
-=======
 
-};
->>>>>>> 4e6b53ca86f86abac59df7e9408c1bb6f051c7d1:SpaceBattle.Lib.Test/AngleTest.cs
+
