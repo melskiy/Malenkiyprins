@@ -13,7 +13,7 @@ public class AngleTest
         Assert.Equal(new Angle(5, 3), b + c);
         Assert.Equal(new Angle(29, 15), b + d);
     }
-    
+
     [Fact]
     public void AngleTestEqual()
     {
@@ -61,4 +61,7 @@ public class AngleTest
         Assert.False(a.Equals(b));
         Assert.False(a.Equals(c));
     }
+    
 };
+
+
