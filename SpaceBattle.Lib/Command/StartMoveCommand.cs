@@ -9,7 +9,7 @@ public class StartMoveCommand:ICommand{
     public void Execute()
     {
         var MoveCommand = new MoveCommand(obj);
-        IoC<object>.Resolve("qadd",MoveCommand);
+        IoC.Resolve<object>("qadd",MoveCommand);
         MoveCommand.Execute();
     }
 }
