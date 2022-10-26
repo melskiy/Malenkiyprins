@@ -1,8 +1,8 @@
 namespace SpaceBattle.Lib;
 public class Angle
 {
-    public int numerator;
-    public int denominator;
+    private int numerator;
+    private int denominator;
     public Angle(int n, int d)
     {
         this.numerator = n;
