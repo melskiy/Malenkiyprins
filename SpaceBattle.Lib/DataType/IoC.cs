@@ -1,7 +1,6 @@
 namespace SpaceBattle.Lib;
-
-public static class IoC{
-    public static T Resolve<T> (string key, params object[] args){
-        return default;
-    }
+public class IoC
+{
+    private static Dictionary<string, IStrategy> store = new();
+    public static void Resolve<T>(string key, params object[] args) => store[key].Execute();
 }
