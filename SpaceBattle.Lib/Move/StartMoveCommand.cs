@@ -8,7 +8,7 @@ public class StartMoveCommand : ICommand
         this._uObject = obj;
     }
 
-    public StartMoveCommand(IMovableStartable o) {}
+    // public StartMoveCommand(IMovableStartable o) {}
 
     public void Execute()
     {
