@@ -1,6 +1,6 @@
 namespace SpaceBattle.Lib;
 
-public class RotateCommand: ICommand
+public class RotateCommand : ICommand
 {
     private IRotatable obj;
     public RotateCommand(IRotatable obj)
@@ -9,6 +9,6 @@ public class RotateCommand: ICommand
     }
     public void Execute()
     {
-        obj.Angle += obj.AngleVelocity; 
+        obj.Angle += obj.AngleVelocity;
     }
 }
