@@ -1,1 +1,1 @@
-# Malenkiyprins
+[![пакрытие](https://codecov.io/gh/melskiy/Malenkiyprins/branch/malya/graph/badge.svg?token=JIEXYPF5RG)](https://codecov.io/gh/melskiy/Malenkiyprins)
