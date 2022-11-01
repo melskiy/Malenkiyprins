@@ -1,8 +1,10 @@
 namespace SpaceBattle.Lib;
-public class MacroCommand : ICommand {
+public class MacroCommand : ICommand
+{
     List<ICommand> arr = new();
-    MacroCommand (List<ICommand> arr){
+    MacroCommand(List<ICommand> arr)
+    {
         this.arr = arr;
     }
-   public void Execute(){arr.ForEach(cmd => cmd.Execute());}
+    public void Execute() { arr.ForEach(id => id.Execute()); }
 }

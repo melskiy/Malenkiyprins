@@ -61,7 +61,7 @@ public class AngleTest
         Assert.False(a.Equals(b));
         Assert.False(a.Equals(c));
     }
-    
+
 };
 
 

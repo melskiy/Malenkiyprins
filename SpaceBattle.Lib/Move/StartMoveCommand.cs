@@ -1,19 +1,15 @@
 namespace SpaceBattle.Lib;
 public class StartMoveCommand : ICommand
 {
-    IUobject _uObject;
-
-    public StartMoveCommand(IUobject obj)
-    {
-        this._uObject = obj;
-    }
-
-    // public StartMoveCommand(IMovableStartable o) {}
+    IMoveStartable startable;
 
     public void Execute()
     {
-        // ICommand rc = IoC<ICommand>.Resolve("Command.Repeat", this._queue);
-        // IoC<ICommand>.Resolve("UObject.setProperty", this._uObject, "Command.Move", rc);
-        // this._queue.Push(rc);
+        IoC.Resolve<ICommand>(
+            "Game.Commands.SetProperty",
+            startable.Target,
+            "Velocity",
+            startable.InitialVelocity
+        ).Execute();
     }
 }
