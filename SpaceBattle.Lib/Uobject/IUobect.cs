@@ -1,5 +1,5 @@
 namespace SpaceBattle.Lib;
-public interface IUobject
+public interface IUObject
 {
     public void setProperty(string key, object value);
     public object getProperty(string key);

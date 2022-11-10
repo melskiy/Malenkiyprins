@@ -5,7 +5,7 @@ public interface IMoveStartable
     {
         get;
     }
-    int InitialVelocity
+    Vector InitialVelocity
     {
         get;
     }

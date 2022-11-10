@@ -1,0 +1,1 @@
+namespace SpaceBattle.Lib;

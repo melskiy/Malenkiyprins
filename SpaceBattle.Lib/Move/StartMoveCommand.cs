@@ -3,6 +3,11 @@ public class StartMoveCommand : ICommand
 {
     IMoveStartable startable;
 
+    public StartMoveCommand(IMoveStartable startable)
+    {
+        this.startable = startable;
+    }
+
     public void Execute()
     {
         IoC.Resolve<ICommand>(
@@ -10,6 +15,11 @@ public class StartMoveCommand : ICommand
             startable.Target,
             "Velocity",
             startable.InitialVelocity
-        ).Execute();
+        ).Execute();    
     }
+
+
 }
+
+
+// IoC.Resolve<ICommand>("Queue.Push", q, cmd).Execute();

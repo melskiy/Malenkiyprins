@@ -12,7 +12,7 @@ public class EmptyCommandStrategy : IStrategy
     {
         this.command = new EmptyCommand();
     }
-    public object Execute(params object[] args)
+    public object DoAlgorithm(params object[] args)
     {
         return this.command;
     }

@@ -1,5 +1,5 @@
 namespace SpaceBattle.Lib;
-public class UObject : IUobject
+public class UObject : IUObject
 {
     public Dictionary<string, object> SetOfProperties = new Dictionary<string, object>() { };
     public UObject(Dictionary<string, object> dic)
@@ -14,6 +14,4 @@ public class UObject : IUobject
     {
         return SetOfProperties[key];
     }
-
-
 };

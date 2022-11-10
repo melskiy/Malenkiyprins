@@ -1,7 +1,7 @@
 namespace SpaceBattle.Lib.Test;
 public class AddTwoNumbersStrategy : IStrategy
 {
-    public object Execute(params object[] args)
+    public object DoAlgorithm(params object[] args)
     {
         int a = (int)args[0];
         int b = (int)args[1];
