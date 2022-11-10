@@ -3,7 +3,7 @@ public class StopMoveCommand : ICommand
 {
     IMoveStopable stopable;
 
-    public StopMoveCommand(IMoveStopable stopable) 
+    public StopMoveCommand(IMoveStopable stopable)
     {
         this.stopable = stopable;
     }

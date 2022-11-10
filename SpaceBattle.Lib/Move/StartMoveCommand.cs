@@ -15,9 +15,10 @@ public class StartMoveCommand : ICommand
             startable.Target,
             "Velocity",
             startable.InitialVelocity
-        ).Execute();    
-    }
+        ).Execute();
 
+        IMovable movable = IoC.Resolve<IMovable>("GenerateAdapter", typeof(MovableAdapter), startable.Target);
+    }
 
 }
 
