@@ -1,6 +1,6 @@
-namespace SpaceBattle.Lib;
+// namespace SpaceBattle.Lib;
 //Activator
-//Imovable movable =IoC.Resolve<IMovable>("GenerateAdapter", typeOf(IMovable),object);  стратегия 
+//Imovable movable =IoC.Resolve<IMovable>("GenerateAdapter", typeOf(IMovable), object);  стратегия 
 //System refllection
 //Написать стратегию для генерации адаптеров
 // Тред локал айм трап айм трап вылизал её с головы до ног оу оу я снова обогнал, снова обогнал предлагали 10, забрал 10 по 10

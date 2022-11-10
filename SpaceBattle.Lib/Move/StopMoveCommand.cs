@@ -3,6 +3,11 @@ public class StopMoveCommand : ICommand
 {
     IMoveStopable stopable;
 
+    public StopMoveCommand(IMoveStopable stopable) 
+    {
+        this.stopable = stopable;
+    }
+
     public void Execute()
     {
         IoC.Resolve<ICommand>(
