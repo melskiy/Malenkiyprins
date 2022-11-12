@@ -9,8 +9,9 @@ public class RepeatCommand : ICommand
 
     public void Execute()
     {
-        cmd.Execute();
-        //TODO: запушить в очередь
+        IoC.Resolve<ICommand>("Game.Queue.Push", IoC.Resolve<IQueue<ICommand>>("Game.Queue"), cmd).Execute();
     }
 
 }
+
+// public 

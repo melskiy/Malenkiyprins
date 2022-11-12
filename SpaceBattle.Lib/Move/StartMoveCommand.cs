@@ -18,6 +18,7 @@ public class StartMoveCommand : ICommand
         ).Execute();
 
         IMovable movable = IoC.Resolve<IMovable>("GenerateAdapter", typeof(MovableAdapter), startable.Target);
+        
     }
 
 }
