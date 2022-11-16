@@ -22,9 +22,9 @@ public class OperationMoveStrategy : IStrategy
         IEnumerable<string> listcommands = (IEnumerable<string>)args[1];
         var listcommand = listcommands.Select(c => IoC.Resolve<ICommand>(c,uobj));
         ICommand mooving =  IoC.Resolve<ICommand>("Create.MacroCommand", listcommand);
-        ICommand rmooving = IoC.Resolve<ICommand>("Create.RepeatCommand", mooving);
-        IoC.Resolve<ICommand>("Game.Commands.SetProperty",uobj,"ThisCommand",rmooving).Execute();
-        return uobj.getProperty("ThisCommand");
+        IoC.Resolve<ICommand>("Game.Commands.SetProperty",uobj,"ThisCommand",mooving).Execute();
+        ICommand rmooving = IoC.Resolve<ICommand>("Create.RepeatCommand", uobj.getProperty("ThisCommand"));
+        return rmooving;
     }
     
 
