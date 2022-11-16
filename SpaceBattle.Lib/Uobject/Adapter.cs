@@ -31,3 +31,22 @@ public class MovableAdapter : IMovable
 
 
 }
+
+public class QueueAdapter<T> : IQueue<T>
+{
+    private Queue<T> mq;
+    QueueAdapter(Queue<T> mq)
+    {
+        this.mq = mq;
+    }
+
+    public void Push(T q)
+    {
+        mq.Enqueue(q);
+    }
+
+    public T Pop()
+    {
+        return mq.Dequeue();;
+    }
+}

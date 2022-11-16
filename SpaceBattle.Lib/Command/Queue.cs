@@ -1,4 +1,6 @@
 namespace SpaceBattle.Lib;
+
+
 public class QueuePushStrategy<T> : IStrategy
 {
     public object DoAlgorithm(params object[] args)
