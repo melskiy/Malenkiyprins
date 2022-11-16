@@ -2,7 +2,11 @@ namespace SpaceBattle.Lib;
 public class MacroCommand : ICommand
 {
     IEnumerable<ICommand> arr;
-    MacroCommand(params ICommand[] arr)
+    public MacroCommand(params ICommand[] arr)
+    {
+        this.arr = arr;
+    }
+    public MacroCommand(IEnumerable<ICommand> arr)
     {
         this.arr = arr;
     }
