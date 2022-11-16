@@ -1,4 +1,6 @@
 namespace SpaceBattle.Lib;
+
+
 public class QueuePushStrategy<T> : IStrategy
 {
     public object DoAlgorithm(params object[] args)
@@ -23,3 +25,18 @@ public class QueuePushCommand<T> : ICommand
         q.Push(target);
     }
 }
+
+public class GetQueueStrategy<T> : IStrategy
+{
+    IQueue<T> q;
+    public GetQueueStrategy(IQueue<T> q)
+    {
+        this.q = q;
+    }
+    public object DoAlgorithm(params object[] args)
+    {
+        return this.q;
+    }
+}
+
+// IoC.Resolve<ICommand>("Ioc.Add", "Game.Queue", new GetQueueStrategy(IQueue<ICommand>)).Execute() for test
