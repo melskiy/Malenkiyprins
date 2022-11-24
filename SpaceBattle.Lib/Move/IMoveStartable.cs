@@ -1,7 +1,7 @@
 namespace SpaceBattle.Lib;
 public interface IMoveStartable
 {
-    UObject Target
+    IUObject Target
     {
         get;
     }

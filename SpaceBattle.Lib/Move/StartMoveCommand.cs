@@ -2,12 +2,9 @@ namespace SpaceBattle.Lib;
 public class StartMoveCommand : ICommand
 {
     IMoveStartable startable;
-    IEnumerable<string> listcomands;
-
-    public StartMoveCommand(IMoveStartable startable, IEnumerable<string> listcomands)
+    public StartMoveCommand(IMoveStartable startable)
     {
         this.startable = startable;
-        this.listcomands = listcomands;
     }
 
     public void Execute()
@@ -19,9 +16,10 @@ public class StartMoveCommand : ICommand
             startable.InitialVelocity
         ).Execute();
 
-        ICommand cmd  = IoC.Resolve<ICommand>("Game.Commands.Move", startable.Target,listcomands);
+        ICommand cmd  = IoC.Resolve<ICommand>("Game.Commands.Move", startable.Target);
         IoC.Resolve<ICommand>("Game.Queue.Push", IoC.Resolve<IQueue<ICommand>>("Game.Queue"), cmd).Execute();
         
+
     }
 
 }

@@ -1,7 +1,7 @@
 namespace SpaceBattle.Lib;
 public interface IMoveStopable
 {
-    UObject Target
+    IUObject Target
     {
         get;
     }
