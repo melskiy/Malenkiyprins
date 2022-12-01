@@ -10,11 +10,8 @@ public class StopMoveCommand : ICommand
 
     public void Execute()
     {
-        IoC.Resolve<ICommand>(
-            "Game.Commands.SetCommand",
-            stopable.Target,
-            "Movement",
-            IoC.Resolve<ICommand>("Game.Command.Empty")
-        ).Execute();
+        IoC.Resolve<ICommand>("Game.Commands.RemoveProperty", stopable.Target, "Speed").Execute();
+        IoC.Resolve<Iinjectable>("Game.Commands.GetProperty", stopable.Target, "Moving").Inject(IoC.Resolve<ICommand>("Game.Commands.EmptyCommand"));
+        
     }
 }
