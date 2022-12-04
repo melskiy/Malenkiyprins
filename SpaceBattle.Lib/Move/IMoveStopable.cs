@@ -5,4 +5,8 @@ public interface IMoveStopable
     {
         get;
     }
+    IEnumerable<string> Properties
+    {
+        get;
+    }
 }
