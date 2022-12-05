@@ -11,7 +11,6 @@ public class StopMoveCommand : ICommand
     public void Execute()
     {
         stopable.Properties.ToList<string>().ForEach(x => IoC.Resolve<ICommand>("Game.Commands.RemoveProperty",stopable.Target,x).Execute());
-        IoC.Resolve<Iinjectable>("Game.Commands.GetProperty", stopable.Target, "Moving").Inject(IoC.Resolve<ICommand>("Game.Commands.EmptyCommand"));
-        
+        IoC.Resolve<IInjectable>("Game.Commands.GetProperty", stopable.Target, "Moving").Inject(IoC.Resolve<ICommand>("Game.Commands.EmptyCommand"));
     }
 }

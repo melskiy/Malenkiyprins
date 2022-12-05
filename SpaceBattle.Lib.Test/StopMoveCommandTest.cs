@@ -9,7 +9,7 @@ public class StopMoveCommandTests
         var mockCommand = new Mock<ICommand>();
         mockCommand.Setup(x => x.Execute());
 
-        var mockInject = new Mock<Iinjectable>();
+        var mockInject = new Mock<IInjectable>();
         mockInject.Setup(x => x.Inject(It.IsAny<ICommand>()));
 
         var mockStrategyReturnCommand = new Mock<IStrategy>();
@@ -69,6 +69,4 @@ public class StopMoveCommandTests
 
         Assert.Throws<Exception>(() => startMove.Execute());
     }
-
-    
 }
