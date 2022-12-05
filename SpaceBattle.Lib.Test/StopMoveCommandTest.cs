@@ -27,7 +27,7 @@ public class StopMoveCommandTests
 }
 
     [Fact]
-    public void NormTest()
+    public void PositiveTest()
     {
         var stopable = new Mock<IMoveStopable>();
         var obj = new Mock<IUObject>();
@@ -57,7 +57,7 @@ public class StopMoveCommandTests
     }
 
     [Fact]
-    public void SpeedMethodReturnsException()
+    public void VelocityMethodReturnsException()
     {
         var stopable = new Mock<IMoveStopable>();
         var obj = new Mock<IUObject>();

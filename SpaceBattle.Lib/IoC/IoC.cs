@@ -48,8 +48,8 @@ public class IoCAddStrategy : IStrategy
 
 public class IoCResolveStrategy : IStrategy
 {
-    private Dictionary<string, IStrategy> store;
-    public IoCResolveStrategy(Dictionary<string, IStrategy> store)
+    private IDictionary<string, IStrategy> store;
+    public IoCResolveStrategy(IDictionary<string, IStrategy> store)
     {
         this.store = store;
     }
