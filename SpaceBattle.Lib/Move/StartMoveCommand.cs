@@ -2,8 +2,8 @@ namespace SpaceBattle.Lib;
 
 public class StartMoveCommand : ICommand
 {
-    private IStartable startable;
-    public StartMoveCommand(IStartable startable)
+    private IMoveStartable startable;
+    public StartMoveCommand(IMoveStartable startable)
     {
         this.startable = startable;
     }

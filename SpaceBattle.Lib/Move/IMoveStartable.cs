@@ -1,11 +1,10 @@
 namespace SpaceBattle.Lib;
 public interface IMoveStartable
-{
-    IUObject Target
+{   IUObject Target
     {
         get;
     }
-    Vector InitialVelocity
+    IDictionary<string, object> Properties
     {
         get;
     }
