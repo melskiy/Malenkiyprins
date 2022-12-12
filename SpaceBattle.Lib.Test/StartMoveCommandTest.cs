@@ -1,32 +1,37 @@
 using Moq;
-
+using Hwdtech;
+using Hwdtech.Ioc;
 namespace SpaceBattle.Lib.Test;
 
 public class StartMoveCommandTests
 {
     public StartMoveCommandTests()
     {
-        var mockCommand = new Mock<ICommand>();
+        new InitScopeBasedIoCImplementationCommand().Execute();
+
+        IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+
+        var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
         mockCommand.Setup(x => x.Execute());
 
         var mockStrategyWithParams = new Mock<IStrategy>();
         mockStrategyWithParams.Setup(x => x.DoAlgorithm(It.IsAny<object[]>())).Returns(mockCommand.Object);
 
         var mockStrategyWithoutParams = new Mock<IStrategy>();
-        mockStrategyWithoutParams.Setup(x => x.DoAlgorithm()).Returns(new Queue<ICommand>());
+        mockStrategyWithoutParams.Setup(x => x.DoAlgorithm()).Returns(new Queue<SpaceBattle.Lib.ICommand>());
         
 
         var mockStrategyReturnString = new Mock<IStrategy>();
         mockStrategyReturnString.Setup(x => x.DoAlgorithm()).Returns(new List<string>());
         
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Commands.SetProperty", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Operations.Moving", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Queue.Push", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Queue", mockStrategyWithoutParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Config.ForMove", mockStrategyReturnString.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Command.Macro", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Command.Inject", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Add", "Game.Command.Repeat", mockStrategyWithParams.Object).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Commands.SetProperty", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Operations.Moving", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Push", (object[] args) =>  mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue", (object[] args) => mockStrategyWithoutParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Config.ForMove", (object[] args) => mockStrategyReturnString.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.Macro", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.Inject", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.Repeat", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
     }                                           
 
     [Fact]
