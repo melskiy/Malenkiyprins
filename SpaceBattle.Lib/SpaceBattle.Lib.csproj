@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hwdtech.Core" Version="1.0.0" />
+    <PackageReference Include="Hwdtech.IoC" Version="1.0.0" />
+    <PackageReference Include="Hwdtech.Ioc.ScopeBasedIoCImplementation" Version="1.0.0" />
+    <PackageReference Include="Hwdtech.Ioc.SingleThreadScope" Version="1.0.0" />
     <PackageReference Include="moq" Version="4.18.2" />
   </ItemGroup>
 

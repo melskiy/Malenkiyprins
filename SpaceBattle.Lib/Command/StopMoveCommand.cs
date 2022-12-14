@@ -1,4 +1,6 @@
 namespace SpaceBattle.Lib;
+using Hwdtech;
+using Hwdtech.Ioc;
 public class StopMoveCommand : ICommand
 {
     IMoveStopable stopable;
