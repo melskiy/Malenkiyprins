@@ -51,7 +51,7 @@ public class StopMoveCommandTests
         var stopable = new Mock<IMoveStopable>();
 
         stopable.SetupGet(a => a.Target).Throws<Exception>().Verifiable();
-        stopable.SetupGet(a => a.Properties).Returns(new List<string>(){"Speed"}).Verifiable();
+        stopable.SetupGet(a => a.Properties).Returns(new List<string>(){"Velocity"}).Verifiable();
 
         ICommand stopMove = new StopMoveCommand(stopable.Object);
 
