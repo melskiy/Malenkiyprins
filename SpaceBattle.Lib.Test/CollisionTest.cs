@@ -33,7 +33,7 @@ public class CollisionTest
 
 
 
-        ICommand Tree = new TreeCreate(@".\SpaceBattle.Lib.Test\Vectors.txt");
+        ICommand Tree = new TreeCreate("../../../Vectors.txt");
         Tree.Execute();
 
         ICommand IsCollision = new IsCollision(obj1.Object, obj2.Object);

@@ -17,7 +17,7 @@ public class TreeTests
     public void Treshka()
     {
 
-        ICommand Tree = new TreeCreate(@".\SpaceBattle.Lib.Test\Vectors.txt");
+        ICommand Tree = new TreeCreate("../../../Vectors.txt");
 
   
         Tree.Execute();
