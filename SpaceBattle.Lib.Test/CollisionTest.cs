@@ -55,5 +55,4 @@ public class CollisionTest
         IStrategy PrepareData = new PrepareData();
         Object.Equals(new List<int>(){0,0,0,0}, PrepareData.DoAlgorithm(property1,property2));
     }
-
 }
