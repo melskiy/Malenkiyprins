@@ -2,7 +2,7 @@ name: dotnet package
  
 on:
   push:
-    branches: ["Nikita"] 
+    branches: ["develop"] 
 
 jobs:
   build:
