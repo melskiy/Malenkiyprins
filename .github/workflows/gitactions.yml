@@ -2,7 +2,7 @@ name: dotnet package
  
 on:
   push:
-    branches: ["malya"] 
+    branches: ["Nikita"] 
 
 jobs:
   build:
@@ -27,9 +27,6 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v3
         with: 
-          token: ${{ secrets.CODECOV_TOKEN }}
-          override_pr: ${{ github.event.number }}
-          override_commit: ${{ github.event.pull_request.head.sha }}  
           files: SpaceBattle.Lib.Test/coverage/coverage.opencover.xml 
       - name: Create Test Coverage Badge
         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
@@ -40,3 +37,4 @@ jobs:
           path: SpaceBattle.Lib.Test/coverage/coverage.opencover.xml     
       - name: Print code coverage
         run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
+        

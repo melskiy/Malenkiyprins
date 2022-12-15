@@ -17,9 +17,9 @@ public class TreeTests
     public void Treshka()
     {
 
-        ICommand Tree = new TreeCreate(@"C:\Users\malya\Desktop\Malenkiyprins\SpaceBattle.Lib.Test\Vectors.txt");
+        ICommand Tree = new TreeCreate(@"..\..\..\Vectors.txt");
 
-        
+  
         Tree.Execute();
         var Tree2 = IoC.Resolve<IDictionary<int, object>>("ICollisionTreeRootDictionary");
 

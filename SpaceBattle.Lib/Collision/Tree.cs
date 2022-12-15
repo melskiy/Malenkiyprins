@@ -3,7 +3,6 @@ using System.Text;
 namespace SpaceBattle.Lib;
 
 
-
 public class TreeCreate:ICommand
 {
     string path;
@@ -28,5 +27,3 @@ public class TreeCreate:ICommand
         ); 
     }
 }
-
-
