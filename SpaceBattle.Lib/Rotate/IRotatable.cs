@@ -2,12 +2,12 @@ namespace SpaceBattle.Lib;
 
 public interface IRotatable
 {
-    public Angle Angle 
+    public Angle Angle
     {
         get;
         set;
     }
-    public Angle AngleVelocity 
+    public Angle AngleVelocity
     {
         get;
     }
