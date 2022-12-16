@@ -19,7 +19,6 @@ public class StartMoveCommandTests
         var mockStrategyWithoutParams = new Mock<IStrategy>();
         mockStrategyWithoutParams.Setup(x => x.DoAlgorithm()).Returns(new Queue<SpaceBattle.Lib.ICommand>());
         
-
         var mockStrategyReturnString = new Mock<IStrategy>();
         mockStrategyReturnString.Setup(x => x.DoAlgorithm()).Returns(new List<string>());
         

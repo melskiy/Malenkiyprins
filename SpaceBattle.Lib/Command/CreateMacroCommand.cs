@@ -23,9 +23,11 @@ public class LongTermOperationStrategy : IStrategy
         IUObject uobj = (IUObject)args[1];
 
         var macro = IoC.Resolve<ICommand>("CreateMacroCommandStrategy", name, uobj);
-        ICommand inject_command = IoC.Resolve<ICommand>("Game.Command.Inject", macro);
-        ICommand repeatCommand = IoC.Resolve<ICommand>("Game.Command.Repeat", inject_command);
 
-        return repeatCommand;
+        ICommand repeatCommand = IoC.Resolve<ICommand>("Game.Command.Repeat", macro);
+        ICommand inject_command = IoC.Resolve<ICommand>("Game.Command.Inject", repeatCommand);
+        
+
+        return inject_command;
     }
 }
