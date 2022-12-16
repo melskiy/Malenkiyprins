@@ -2,7 +2,7 @@ namespace SpaceBattle.Lib;
 
 public interface IMovable
 {
-    public Vector Position 
+    public Vector Position
     {
         get;
         set;
