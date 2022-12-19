@@ -4,7 +4,6 @@ namespace SpaceBattle.Lib.Test;
 
 public class CollisionTest
 {    
-    [Fact]
     public void CollisionTest()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
