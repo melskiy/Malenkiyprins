@@ -32,5 +32,4 @@ public class TreeTest
 
         Assert.True(((IDictionary<int, object>)((IDictionary<int, object>) Tree2[12])[32]).ContainsKey(56));
     }
-
 }

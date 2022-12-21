@@ -1,7 +1,5 @@
 using Hwdtech;
-using System.Text;
 namespace SpaceBattle.Lib;
-
 
 public class IsCollision : ICommand
 {
@@ -22,17 +20,5 @@ public class IsCollision : ICommand
         {
             IoC.Resolve<ICommand>("Game.Colision", obj1, obj2).Execute();
         }
-    }
-}
-
-public class PrepareData : IStrategy
-{
-    public object DoAlgorithm(params object[] args)
-    {
-        List<int> List = new List<int>();
-        List<int> property1 = (List<int>)args[0];
-        List<int> property2 = (List<int>)args[1];
-        property1.ForEach(i => List.Add(i - property2[property1.IndexOf(i)]));
-        return List;
     }
 }
