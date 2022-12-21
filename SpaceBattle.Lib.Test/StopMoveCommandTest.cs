@@ -73,6 +73,4 @@ public class StopMoveCommandTests
 
         Assert.Throws<Exception>(() => startMove.Execute());
     }
-
-    
 }

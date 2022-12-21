@@ -35,9 +35,9 @@ public class StartMoveCommandTests
     }                                           
 
     [Fact]
-    public void NormTest()
+    public void PositiveStartMoveCommandTest()
     {                                                                                                                             
-        var startable = new Mock<IStartable>();
+        var startable = new Mock<IMoveStartable>();
         var obj = new Mock<IUObject>();
 
         startable.SetupGet(a => a.Target).Returns(obj.Object).Verifiable();
@@ -53,7 +53,7 @@ public class StartMoveCommandTests
     [Fact]
     public void TargetMethodReturnsException()
     {
-        var startable = new Mock<IStartable>();
+        var startable = new Mock<IMoveStartable>();
 
         startable.SetupGet(a => a.Target).Throws<Exception>().Verifiable();
         startable.SetupGet(a => a.Properties).Returns(new Dictionary<string, object>(){{"Speed", new Vector(1, 1)}}).Verifiable();
@@ -67,7 +67,7 @@ public class StartMoveCommandTests
     [Fact]
     public void SpeedMethodReturnsException()
     {
-        var startable = new Mock<IStartable>();
+        var startable = new Mock<IMoveStartable>();
         var obj = new Mock<IUObject>();
 
         startable.SetupGet(a => a.Target).Returns(obj.Object).Verifiable();
@@ -81,7 +81,7 @@ public class StartMoveCommandTests
     [Fact]
     public void OperationMoveStrategyTest()
     {
-        var startable = new Mock<IStartable>();
+        var startable = new Mock<IMoveStartable>();
         var obj = new Mock<IUObject>();
 
         startable.SetupGet(a => a.Target).Returns(obj.Object);

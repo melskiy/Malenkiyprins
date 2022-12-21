@@ -2,9 +2,9 @@ using Hwdtech;
 using Hwdtech.Ioc;
 namespace SpaceBattle.Lib.Test;
 
-public class MacroCommandTests
+public class LongTermCommandTests
 {
-    public MacroCommandTests()
+    public LongTermCommandTests()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
 
@@ -29,6 +29,7 @@ public class MacroCommandTests
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.Repeat", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
     }
 
+    [Fact]
     public void LongTermOperationStrategyTest()
     {
         IStrategy LongTermOperation = new LongTermOperationStrategy();
