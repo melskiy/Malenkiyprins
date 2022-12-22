@@ -17,7 +17,7 @@ public class RegisterHandlerCommandTest
     }
     
     [Fact]
-    public void Treshka()
+    public void TestRegisterCommand()
     {
         var cmd = new RegisterHandlerCommand(typeof(MoveCommand), typeof(ArgumentException), Handler.Object);
         cmd.Execute();

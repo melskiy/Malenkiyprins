@@ -15,22 +15,19 @@ public class FindHeadlerTests
         
     }
     [Fact]
-    public void Treshka()
+    public void PositiveGoToTreeTest()
     {
         var TreeFind = new FindHandler().DoAlgorithm(typeof(MoveCommand),typeof(ArgumentException));
         Assert.Equal(TreeFind.GetType(),Handler.Object.GetType());
-
     }
 
     [Fact]
-    public void Treshka2()
+    public void ValidDefoltTest()
     {
-
         var Tree = IoC.Resolve<IDictionary <object,IDictionary<object,IHandler>>>("ExeptionTree");
         var Tree2 = Tree[typeof(MoveCommand)];
         Tree2.Add("default",Handler.Object);
         var TreeFind2 = new FindHandler().DoAlgorithm(typeof(MoveCommand),typeof(MockException));
         Assert.Equal(TreeFind2.GetType(),Handler.Object.GetType());
-        
     }
 }
