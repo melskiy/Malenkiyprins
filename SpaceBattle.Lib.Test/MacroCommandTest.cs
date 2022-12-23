@@ -29,11 +29,12 @@ public class MacroCommandTests
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.Repeat", (object[] args) => mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
     }
 
-    public void LongTermOperationStrategyTest()
+    [Fact]
+    public void CreateMacroCommandStrategyTest()
     {
-        IStrategy LongTermOperation = new LongTermOperationStrategy();
+        IStrategy CreateMacroCommand = new CreateMacroCommandStrategy();
         string name = "Moving";
         var obj = new Mock<IUObject>();
-        Assert.NotNull(LongTermOperation.DoAlgorithm(name, obj.Object));
+        Assert.NotNull(CreateMacroCommand.DoAlgorithm(name, obj.Object));
     }
 }
