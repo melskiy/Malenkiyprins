@@ -26,7 +26,7 @@ public class RegisterHandlerCommandTest
         var Tree = IoC.Resolve<IDictionary<int, ICommand>>("ExceptionTree");
         IEnumerable<Type> Types = new List<Type> { typeof(MoveCommand), typeof(ArgumentException) };
 
-        var Hashs = IoC.Resolve<int>("GetHashStrategy", Types.OrderBy(x => x.GetHashCode()));
+        var Hashs = IoC.Resolve<int>("GetHashStrategy", Types);
         Assert.Equal(Tree[Hashs], Handler.Object);
     }
 }
