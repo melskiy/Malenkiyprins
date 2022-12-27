@@ -14,7 +14,7 @@ public class RegisterHandlerCommand : ICommand
     public void Execute()
     {
         var handlerTree = IoC.Resolve<IDictionary<int, ICommand>>("ExceptionTree");
-        var hashes = IoC.Resolve<int>("GetHashStrategy", _list_of_types);
+        var hashes = IoC.Resolve<int>("GetHashStrategy", _list_of_types.OrderBy(x => x.GetHashCode()));
         handlerTree.TryAdd(hashes, _handler);
     }
 }

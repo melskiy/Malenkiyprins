@@ -16,6 +16,7 @@ public class RegisterHandlerCommandTest
 
         var ghcs = new GetHashStrategy();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetHashStrategy", (object[] args) => ghcs.DoAlgorithm(args)).Execute();
+
     }
     [Fact]
     public void RegisterHandleTest()
@@ -24,8 +25,8 @@ public class RegisterHandlerCommandTest
         cmd.Execute();
         var Tree = IoC.Resolve<IDictionary<int, ICommand>>("ExceptionTree");
         IEnumerable<Type> Types = new List<Type> { typeof(MoveCommand), typeof(ArgumentException) };
-        var Hashs = Types.Aggregate(31, (total, next) => HashCode.Combine(total, next));
-        Assert.Equal(Tree[Hashs], Handler.Object);
 
+        var Hashs = IoC.Resolve<int>("GetHashStrategy", Types.OrderBy(x => x.GetHashCode()));
+        Assert.Equal(Tree[Hashs], Handler.Object);
     }
 }

@@ -2,10 +2,10 @@ using Hwdtech;
 using Hwdtech.Ioc;
 namespace SpaceBattle.Lib.Test;
 
-public class FindHeadlerTests
+public class FindHandlerTests
 {
     Mock<ICommand> Handler = new Mock<ICommand>();
-    public FindHeadlerTests()
+    public FindHandlerTests()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
