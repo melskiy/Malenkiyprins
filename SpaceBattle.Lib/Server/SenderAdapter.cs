@@ -10,11 +10,6 @@ public class SenderAdapter : ISender
         _queue = queue;
     }
 
-    public bool isEmpty()
-    {
-        return _queue.Count() == 0;
-    }
-
     public void Send(ICommand message)
     {
         _queue.Add(message);

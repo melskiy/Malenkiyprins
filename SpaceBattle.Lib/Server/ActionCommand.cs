@@ -9,7 +9,7 @@ public class ActionCommand : ICommand
         _strategy = strategy;
     }
 
-    void ICommand.Execute()
+    public void Execute()
     {
         _strategy();
     }

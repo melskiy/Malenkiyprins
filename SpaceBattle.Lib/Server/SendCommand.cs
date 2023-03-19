@@ -13,7 +13,7 @@ public class SendCommand : ICommand
         _message = message;
     }
 
-    void ICommand.Execute()
+    public void Execute()
     {
         ISender ?sender;
 

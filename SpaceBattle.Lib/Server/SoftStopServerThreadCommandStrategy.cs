@@ -13,26 +13,10 @@ public class SoftStopServerThreadCommandStrategy : IStrategy
             action = (Action)args[1];
         }
 
-        ServerThread ?serverThread;
+        var cmd = new SoftStopServerThreadCommand(id, action);
 
-        var listThreads = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap");
-        if(!listThreads.TryGetValue(id, out serverThread))
-        {
-            throw new Exception();
-        }
-
-        ISender ?sender;
-        var listSender = IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap");
-        if(!listSender.TryGetValue(id, out sender))
-        {
-            throw new Exception();
-        }
-
-        var cmd = new SoftStopServerThreadCommand(serverThread, sender, action);
-
-        return new ChangeBehaviourCommand(serverThread, () => {
-            serverThread.HandleCommand();
+        return new SendCommand(id, new ActionCommand(() => {
             cmd.Execute();
-        });
+        })); 
     }
 }
