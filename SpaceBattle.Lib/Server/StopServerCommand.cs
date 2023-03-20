@@ -6,11 +6,10 @@ public class StopServerCommand : ICommand
 {
     public void Execute()
     {
-        try{
-            IoC.Resolve<ConcurrentDictionary<int,ServerThread>>("ThreadMap").ToList().ForEach(item => IoC.Resolve<ICommand>("SoftStopThread",item.Key));
-        }catch (Exception e){
-            IoC.Resolve<ICommand>("FindHandlerStrategy",typeof(SoftStopServerThreadCommand),e.GetType());
-        }
-       
+        IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap").ToList().ForEach(
+            item => IoC.Resolve<ICommand>("SendCommandStrategy",
+                item.Key, IoC.Resolve<ICommand>("SoftStopServerThreadCommandStrategy", item.Key)).Execute()
+        );
+
     }
 }
