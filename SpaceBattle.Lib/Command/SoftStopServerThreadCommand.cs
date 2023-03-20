@@ -7,13 +7,8 @@ public class SoftStopServerThreadCommand : ICommand
     private ServerThread _serverThread;
 
     private Action _action;
-    public SoftStopServerThreadCommand(int id, Action action)
+    public SoftStopServerThreadCommand(ServerThread serverThread, Action action)
     {
-        ServerThread? serverThread;
-        if (!(IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
-        {
-            throw new Exception();
-        }
         _serverThread = serverThread;
         _action = action;
     }
@@ -27,11 +22,14 @@ public class SoftStopServerThreadCommand : ICommand
         }
         var cmd = new ChangeBehaviourCommand(_serverThread, () =>
             {
-                _serverThread.HandleCommand();
                 if (_serverThread.isReceiverEmpty())
                 {
                     _serverThread.ServerThreadStop();
                     _action();
+                }
+                else
+                {
+                    _serverThread.HandleCommand();
                 }
             });
             cmd.Execute();
