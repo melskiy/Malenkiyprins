@@ -48,4 +48,6 @@ public class ServerThread
     public static bool operator ==(ServerThread t1, Thread t2) => t1._thread == t2;
 
     public static bool operator !=(ServerThread t1, Thread t2) => !(t1._thread == t2);
+
+    internal bool isReceiverEmpty() => _queue.isEmpty();
 }

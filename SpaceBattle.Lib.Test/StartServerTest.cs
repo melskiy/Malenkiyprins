@@ -11,20 +11,31 @@ public class StartServerTests
     public void Execute_CreatesAndStartsThreads()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
-         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+       
         const int length = 24;
         var strtservstra = new StartServerStrategy();
-        var crandstrtthread = new CreateAndStartThreadStrategy();
+        
+
+        var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
+        int i = 0;
+        mockCommand.Setup(x => x.Execute()).Callback(() => {i+=1; });
+
+        var mockStrategyWithParams = new Mock<IStrategy>();
+        mockStrategyWithParams.Setup(x => x.DoAlgorithm(It.IsAny<object[]>())).Returns(mockCommand.Object).Verifiable();
+
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "StartServerStrategy",  (object[] args) =>  strtservstra.DoAlgorithm(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateAndStartThreadStrategy",  (object[] args) => crandstrtthread.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateAndStartThreadStrategy",  (object[] args) =>  mockStrategyWithParams.Object.DoAlgorithm(args)).Execute();
        
-        ConcurrentDictionary<int, ServerThread> mapServerThreads = new ConcurrentDictionary<int, ServerThread>();
-        ConcurrentDictionary<int, ISender> mapServerThreadsSenders = new ConcurrentDictionary<int, ISender>();
+
+        IoC.Resolve<ICommand>("StartServerStrategy",length).Execute();
 
 
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => mapServerThreads).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
+
+        Assert.Equal(length,i);
+
+        
+
     
-        IoC.Resolve< SpaceBattle.Lib.ICommand>("StartServerStrategy",length).Execute();
     }
 }

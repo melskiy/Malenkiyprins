@@ -14,38 +14,35 @@ public class StopServerTests
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         
         
-        var sndcmdstra = new SendCommandStrategy();
-        var sftstps = new SoftStopServerThreadCommandStrategy();
+        var mockSendCommandStrategy = new Mock<ICommand>();
+        var mockThreadMap = new ConcurrentDictionary<int, ISender>();
+        var send = new Mock<ISender>();
+
+        mockThreadMap[1] = send.Object;
+        mockThreadMap[2] = send.Object;
+        mockThreadMap[3] = send.Object;
+
         
-        var strtservstra = new StartServerStrategy();
-        var crandstrtthread = new CreateAndStartThreadStrategy();
+        var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
+        int i = 0;
+        mockCommand.Setup(x => x.Execute()).Callback(() => {i+=1; });
+        var mockStrategyWithParams = new Mock<IStrategy>();
+        mockStrategyWithParams.Setup(x => x.DoAlgorithm(It.IsAny<object[]>())).Returns(mockCommand.Object).Verifiable();
 
 
-        ConcurrentDictionary<int, ServerThread> mapServerThreads = new ConcurrentDictionary<int, ServerThread>();
-        ConcurrentDictionary<int, ISender> mapServerThreadsSenders = new ConcurrentDictionary<int, ISender>();
-        
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => mapServerThreads).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
-
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "StartServerStrategy",  (object[] args) =>  strtservstra.DoAlgorithm(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateAndStartThreadStrategy",  (object[] args) => crandstrtthread.DoAlgorithm(args)).Execute();
-        const int length = 24;
-
-        IoC.Resolve<ICommand>("StartServerStrategy",length).Execute();
-
-
-
-
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mockThreadMap).Execute();
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "StopServerStrategy",  (object[] args) =>  new StopServerCommand()).Execute();
-   
-    
 
-
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SendCommandStrategy", (object[] args) => sndcmdstra).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SoftStopServerThreadCommandStrategy", (object[] args) => sftstps).Execute();
-        
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SendCommandStrategy", (object[] args) =>  mockStrategyWithParams.Object.DoAlgorithm(args) ).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SoftStopServerThreadCommandStrategy", (object[] args) =>  mockStrategyWithParams.Object.DoAlgorithm(args) ).Execute();
+       
+       
         IoC.Resolve<ICommand>("StopServerStrategy").Execute();
+
+
+
+        Assert.Equal(3,i);
 
 
     }

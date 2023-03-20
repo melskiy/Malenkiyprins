@@ -12,8 +12,8 @@ public class StartServer : ICommand
     {
         for (int i = 0; i < Length; i++)
         {
-            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", i);
+            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", i).Execute();
         }
-        Console.WriteLine("Запущенно" + Length + "потоков");
+        Console.WriteLine("Запущенно " + Length + " потоков");
     }
 }

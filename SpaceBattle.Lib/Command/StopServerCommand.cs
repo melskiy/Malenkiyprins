@@ -10,6 +10,5 @@ public class StopServerCommand : ICommand
             item => IoC.Resolve<ICommand>("SendCommandStrategy",
                 item.Key, IoC.Resolve<ICommand>("SoftStopServerThreadCommandStrategy", item.Key)).Execute()
         );
-
     }
 }

@@ -2,7 +2,7 @@ namespace SpaceBattle.Lib;
 using Hwdtech;
 using System.Collections.Concurrent;
 
-public class HardStopServerThreadCommandStrategy : IStrategy
+public class SoftStopServerThreadCommandStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
@@ -13,18 +13,17 @@ public class HardStopServerThreadCommandStrategy : IStrategy
             action = (Action)args[1];
         }
 
-        ServerThread ?serverThread;
 
-        var listThreads = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap");
-        if(!listThreads.TryGetValue(id, out serverThread))
+        ServerThread? serverThread;
+        if (!(IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
         {
             throw new Exception();
         }
 
-        var cmd = new HardStopServerThreadCommand(serverThread);
+        var cmd = new SoftStopServerThreadCommand(serverThread, action);
 
         return new SendCommand(id, new ActionCommand(() => {
-            cmd.Execute(); action();
-        }));
+            cmd.Execute();
+        })); 
     }
 }

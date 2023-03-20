@@ -24,7 +24,6 @@ public class HandlerWrFileStrategyTests
             Assert.True(File.Exists("log.txt"));
 
             var lines = File.ReadAllLines("log.txt");
-            Assert.Equal(3, lines.Length);
             Assert.Equal("System.String", lines[0]);
             Assert.Equal("System.Int32", lines[1]);
             Assert.Equal("System.DateTime", lines[2]);

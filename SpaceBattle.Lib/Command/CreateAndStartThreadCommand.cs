@@ -2,27 +2,27 @@ namespace SpaceBattle.Lib;
 using Hwdtech;
 using System.Collections.Concurrent;
 
-public class CreateAndStartThreadStrategy : IStrategy
+public class CreateAndStartThreadCommand : ICommand
 {
-    public object DoAlgorithm(params object[] args)
-    {
-        var id = (int)args[0];
-        var action = () => {};
-        if (args.Length == 2)
-        {
-            action = (Action)args[1];
-        }
+    private int _id;
 
+    public CreateAndStartThreadCommand(int id)
+    {
+        _id = id;
+    }
+
+    public void Execute()
+    {
         var q = new BlockingCollection<ICommand>();
         var t = new ServerThread(new ReceiverAdapter(q));
         var s = new SenderAdapter(q);
 
         var listQueues = IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap");
-        listQueues.TryAdd(id, s);
+        listQueues.TryAdd(_id, s);
 
         var listThreads = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap");
-        listThreads.TryAdd(id, t);
+        listThreads.TryAdd(_id, t);
 
-        return new ActionCommand(() => {t.ServerThreadStart(); action();});
+        t.ServerThreadStart();
     }
 }
