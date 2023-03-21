@@ -14,15 +14,15 @@ class Program
         Console.WriteLine("Нажмите на любую клавишу для запуска....");
         Console.ReadKey();
 
-        IoC.Resolve<ICommand>("StartServerStrategy",numThreads);
+        IoC.Resolve<ICommand>("StartServerStrategy", numThreads);
 
         Console.WriteLine("Нажмите на любую клавишу для завершения работы сервера....");
 
         Console.ReadKey();
-        
+
         IoC.Resolve<ICommand>("StopServerStrategy");
         Console.WriteLine("Все потоки успешно остановеленны 😍...");
-       
+
     }
 
 }
