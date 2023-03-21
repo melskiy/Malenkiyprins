@@ -7,16 +7,16 @@ namespace SpaceBattle.Lib.Test;
 public class SendCommandTest
 {
 
-    ConcurrentDictionary<int, ServerThread> mapServerThreads = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> mapServerThreadsSenders = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<int, ServerThread> thradMap = new ConcurrentDictionary<int, ServerThread>();
+    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
 
     public SendCommandTest()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => mapServerThreads).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => thradMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
     }
     [Fact]
     public void UnsuccessfullSendCommandTestThrowsException()
@@ -31,7 +31,7 @@ public class SendCommandTest
         var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
-        var sendStrategy = new SendCommandStrategy();
+        SendCommandStrategy sendStrategy = new SendCommandStrategy();
 
         var c1 = (ICommand)sendStrategy.DoAlgorithm(falseid, new ActionCommand(() => {
             cv.Set();
@@ -43,7 +43,7 @@ public class SendCommandTest
             cv.WaitOne();
         });
 
-        var hardStopStrategy = new HardStopServerThreadCommandStrategy();
+        HardStopServerThreadCommandStrategy hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
         var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 

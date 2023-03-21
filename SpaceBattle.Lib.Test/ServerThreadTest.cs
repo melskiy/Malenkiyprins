@@ -6,16 +6,16 @@ namespace SpaceBattle.Lib.Test;
 
 public class ServerThreadTests
 {
-    ConcurrentDictionary<int, ServerThread> mapServerThreads = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> mapServerThreadsSenders = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<int, ServerThread> threadMap = new ConcurrentDictionary<int, ServerThread>();
+    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
 
     public ServerThreadTests()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => mapServerThreads).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => threadMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
     }
 
     [Fact]
@@ -45,8 +45,8 @@ public class ServerThreadTests
         cv.WaitOne();
 
         Assert.True(isActive);
-        Assert.True(mapServerThreads.TryGetValue(id, out ServerThread? st));
-        Assert.True(mapServerThreadsSenders.TryGetValue(id, out ISender? s));
+        Assert.True(threadMap.TryGetValue(id, out ServerThread? st));
+        Assert.True(senderMap.TryGetValue(id, out ISender? s));
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
@@ -86,8 +86,8 @@ public class ServerThreadTests
         cv.WaitOne();
 
         Assert.True(isActive);
-        Assert.True(mapServerThreads.TryGetValue(id, out ServerThread? st));
-        Assert.True(mapServerThreadsSenders.TryGetValue(id, out ISender? s));
+        Assert.True(threadMap.TryGetValue(id, out ServerThread? st));
+        Assert.True(senderMap.TryGetValue(id, out ISender? s));
         Assert.True(createAndStartFlag);
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();

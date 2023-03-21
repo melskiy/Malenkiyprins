@@ -21,7 +21,7 @@ public class HardStopTest
     public void UnsuccessfulHardStopServerThreadStrategyTestThrowsExceptionFromConstructor()
     {
         var id = 1;
-        var falseKey = 4;
+        var falseid = 4;
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
@@ -32,7 +32,7 @@ public class HardStopTest
 
         Assert.Throws<Exception>(() =>
         {
-            var hs = (ICommand)hardStopStrategy.DoAlgorithm(falseKey);
+            var hs = (ICommand)hardStopStrategy.DoAlgorithm(falseid);
         });
 
         var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
