@@ -22,31 +22,27 @@ public class SoftStopTest
     [Fact]
     public void SuccessfulSoftStopCommandTest()
     {
-        var key = 5;
+        var id = 5;
         var ssFlag = false;
-        var mre = new AutoResetEvent(true);
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
 
         c.Execute();
 
         var softStopStrategy = new SoftStopServerThreadCommandStrategy();
 
-        var ss = (ICommand)softStopStrategy.DoAlgorithm(key, () =>
+        var ss = (ICommand)softStopStrategy.DoAlgorithm(id, () =>
         {
             ssFlag = true;
-            mre.WaitOne();
+            cv.Set();
         });
 
         ss.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(ssFlag);
     }
@@ -54,27 +50,31 @@ public class SoftStopTest
     [Fact]
     public void UnsuccessfulSoftStopCommandStrategyThrowException()
     {
-        var key = 6;
+        var id = 6;
         var ssFlag = false;
-        var mre = new AutoResetEvent(true);
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
-        var serverThread = mapServerThreads[key];
-        var ss = new SoftStopServerThreadCommand(serverThread, () => { ssFlag = true; });
+        var serverThread = mapServerThreads[id];
+        var ss = new SoftStopServerThreadCommand(serverThread, () => { 
+            ssFlag = true; 
+            cv.Set();
+        });
+        
+        Assert.Throws<Exception>(() => {
+            ss.Execute(); 
+            cv.WaitOne();
+        });
 
-        Assert.Throws<Exception>(() => ss.Execute());
         Assert.False(ssFlag);
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }
@@ -82,67 +82,58 @@ public class SoftStopTest
     [Fact]
     public void UnsuccessfulHardStopServerThreadStrategyTestThrowsException()
     {
-        var key = 1;
-        var falseKey = 4;
-
-        var mre = new AutoResetEvent(true);
+        var id = 1;
+        var falseid = 4;
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
         var softStopStrategy = new SoftStopServerThreadCommandStrategy();
 
         Assert.Throws<Exception>(() =>
         {
-            var ss = (ICommand)softStopStrategy.DoAlgorithm(falseKey);
+            var ss = (ICommand)softStopStrategy.DoAlgorithm(falseid);
         });
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }
     [Fact]
     public void SuccessfulSoftStopCommandTestWithOtherCommands()
     {
-        var key = 9;
+        var id = 9;
         var isExecute = false;
 
 
-        var mre = new AutoResetEvent(true);
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
 
         c.Execute();
         
         var softStopStrategy = new SoftStopServerThreadCommandStrategy();
         var sendStrategy = new SendCommandStrategy();
 
-        var ss = (ICommand)softStopStrategy.DoAlgorithm(key);
+        var ss = (ICommand)softStopStrategy.DoAlgorithm(id);
 
         ss.Execute();
 
-        var c2 = (ICommand)sendStrategy.DoAlgorithm(key, new ActionCommand(() =>
+        var c2 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             isExecute = true;
-            mre.WaitOne();
+            cv.Set();
         }));
 
         c2.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(isExecute);
     }

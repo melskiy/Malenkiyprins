@@ -20,17 +20,12 @@ public class HardStopTest
     [Fact]
     public void UnsuccessfulHardStopServerThreadStrategyTestThrowsExceptionFromConstructor()
     {
-        var key = 1;
+        var id = 1;
         var falseKey = 4;
-
-        var mre = new AutoResetEvent(true);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
@@ -40,7 +35,7 @@ public class HardStopTest
             var hs = (ICommand)hardStopStrategy.DoAlgorithm(falseKey);
         });
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }
@@ -48,17 +43,14 @@ public class HardStopTest
     [Fact]
     public void UnsuccessfulHardStopServerThreadCommandTestThrowsExceptionFromExecute()
     {
-        var key = 5;
-        var mre = new AutoResetEvent(true);
+        var id = 5;
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, ()=> { 
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
-        var serverThread = mapServerThreads[key];
+        var serverThread = mapServerThreads[id];
         var hs = new HardStopServerThreadCommand(serverThread);
 
         Assert.Throws<Exception>(() => hs.Execute());
@@ -66,7 +58,7 @@ public class HardStopTest
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs2 = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs2 = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs2.Execute();
     }

@@ -23,38 +23,34 @@ public class ServerThreadTests
     {
         var isActive = false;
 
-        var key = 1;
+        var id = 1;
 
-        var mre = new AutoResetEvent(true);
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(key, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             isActive = true;
-            mre.WaitOne();
+            cv.Set();
         }));
 
         c1.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(isActive);
-        Assert.True(mapServerThreads.TryGetValue(key, out ServerThread? st));
-        Assert.True(mapServerThreadsSenders.TryGetValue(key, out ISender? s));
+        Assert.True(mapServerThreads.TryGetValue(id, out ServerThread? st));
+        Assert.True(mapServerThreadsSenders.TryGetValue(id, out ISender? s));
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }
@@ -66,48 +62,45 @@ public class ServerThreadTests
         var createAndStartFlag = false;
         var hsFlag = false;
 
-        var key = 2;
-        var mre = new AutoResetEvent(true);
+        var id = 2;
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id, () =>
         {
             createAndStartFlag = true;
-            mre.WaitOne();
         });
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(key, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             isActive = true;
-            mre.WaitOne();
+            cv.Set();
         }));
 
         c1.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(isActive);
-        Assert.True(mapServerThreads.TryGetValue(key, out ServerThread? st));
-        Assert.True(mapServerThreadsSenders.TryGetValue(key, out ISender? s));
+        Assert.True(mapServerThreads.TryGetValue(id, out ServerThread? st));
+        Assert.True(mapServerThreadsSenders.TryGetValue(id, out ISender? s));
         Assert.True(createAndStartFlag);
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key, () =>
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id, () =>
         {
             hsFlag = true;
-            mre.WaitOne();
+            cv.Set();
         });
 
         hs.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(hsFlag);
     }
@@ -153,44 +146,39 @@ public class ServerThreadTests
 
 
         var cmd = new Mock<ICommand>();
-        cmd.Setup(c => c.Execute()).Throws<Exception>();
+        cmd.Setup(c => c.Execute()).Callback(() => throw new Exception());
 
-        var key = 11;
-        var mre = new AutoResetEvent(true);
+        var id = 11;
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
 
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(key, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             new InitScopeBasedIoCImplementationCommand().Execute();
             IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
             var handler = new Mock<ICommand>();
-            handler.Setup(c => c.Execute()).Callback(() => mre.WaitOne());
+            handler.Setup(c => c.Execute()).Callback(() => cv.Set());
             IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "FindHandlerStrategy", (object[] args) => handler.Object).Execute();
             handleFlag = true;
-            throw new Exception();
-
+            cmd.Object.Execute();
         }));
 
         c1.Execute();
 
-        mre.Set();
-        Thread.Sleep(1000);
+        cv.WaitOne();
 
         Assert.True(handleFlag);
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }

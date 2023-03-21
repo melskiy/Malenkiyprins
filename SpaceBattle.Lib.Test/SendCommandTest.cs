@@ -21,37 +21,31 @@ public class SendCommandTest
     [Fact]
     public void UnsuccessfullSendCommandTestThrowsException()
     {
-        var key = 1;
-        var falseKey = 3;
+        var id = 1;
+        var falseid = 3;
 
-        var mre = new AutoResetEvent(true);
+        var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
-        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(key, () =>
-        {
-            mre.WaitOne();
-        });
+        var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(falseKey, new ActionCommand(() =>
-        {
-            mre.WaitOne();
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(falseid, new ActionCommand(() => {
+            cv.Set();
         }));
-
 
         Assert.Throws<Exception>(() =>
         {
             c1.Execute();
-            mre.Set();
-            Thread.Sleep(1000);
+            cv.WaitOne();
         });
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
-        var hs = (ICommand)hardStopStrategy.DoAlgorithm(key);
+        var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 
         hs.Execute();
     }
