@@ -1,4 +1,3 @@
-
 using Hwdtech;
 using Hwdtech.Ioc;
 namespace SpaceBattle.Lib.Test;
@@ -26,7 +25,7 @@ public class StopServerTests
         int i = 0;
         mockCommand.Setup(x => x.Execute()).Callback(() => { i += 1; });
         var mockStrategyWithParams = new Mock<IStrategy>();
-        mockStrategyWithParams.Setup(x => x.DoAlgorithm(It.IsAny<object[]>())).Returns(mockCommand.Object).Verifiable();
+        mockStrategyWithParams.Setup(x => x.DoAlgorithm(It.IsAny<object[]>())).Returns(mockCommand.Object);
 
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mockThreadMap).Execute();
