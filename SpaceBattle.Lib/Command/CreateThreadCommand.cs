@@ -2,11 +2,11 @@ namespace SpaceBattle.Lib;
 using Hwdtech;
 using System.Collections.Concurrent;
 
-public class CreateAndStartThreadCommand : ICommand
+public class CreateThreadCommand : ICommand
 {
     private int _id;
 
-    public CreateAndStartThreadCommand(int id)
+    public CreateThreadCommand(int id)
     {
         _id = id;
     }
@@ -22,7 +22,5 @@ public class CreateAndStartThreadCommand : ICommand
 
         var listThreads = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap");
         listThreads.TryAdd(_id, t);
-
-        t.ServerThreadStart();
     }
 }

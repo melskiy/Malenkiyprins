@@ -2,15 +2,18 @@ namespace SpaceBattle.Lib;
 
 public class ActionCommand : ICommand
 {
-    private Action _strategy;
+    private Action<object[]> _strategy;
 
-    public ActionCommand(Action strategy)
+    private object[] _args;
+
+    public ActionCommand(Action<object[]> strategy, params object[] args)
     {
         _strategy = strategy;
+        _args = args;
     }
 
     public void Execute()
     {
-        _strategy();
+        _strategy(_args);
     }
 }

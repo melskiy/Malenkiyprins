@@ -18,7 +18,7 @@ public class HardStopTest
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
     }
     [Fact]
-    public void UnsuccessfulHardStopServerThreadStrategyTestThrowsExceptionFromConstructor()
+    public void UnsuccessfulHardStopServerThreadStrategyDoAldorithmThrowsException()
     {
         var id = 1;
         var falseid = 4;
@@ -41,7 +41,7 @@ public class HardStopTest
     }
 
     [Fact]
-    public void UnsuccessfulHardStopServerThreadCommandTestThrowsExceptionFromExecute()
+    public void UnsuccessfulHardStopServerThreadCommandExecuteThrowsException()
     {
         var id = 5;
 
@@ -51,10 +51,10 @@ public class HardStopTest
         c.Execute();
 
         var serverThread = mapServerThreads[id];
+
         var hs = new HardStopServerThreadCommand(serverThread);
 
         Assert.Throws<Exception>(() => hs.Execute());
-
 
         var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 

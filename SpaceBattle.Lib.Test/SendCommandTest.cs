@@ -24,26 +24,21 @@ public class SendCommandTest
         var id = 1;
         var falseid = 3;
 
-        var cv = new AutoResetEvent(false);
-
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
         var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
-        SendCommandStrategy sendStrategy = new SendCommandStrategy();
+        var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(falseid, new ActionCommand(() => {
-            cv.Set();
-        }));
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(falseid, new ActionCommand((object[]args) => {}));
 
         Assert.Throws<Exception>(() =>
         {
             c1.Execute();
-            cv.WaitOne();
         });
 
-        HardStopServerThreadCommandStrategy hardStopStrategy = new HardStopServerThreadCommandStrategy();
+        var hardStopStrategy = new HardStopServerThreadCommandStrategy();
 
         var hs = (ICommand)hardStopStrategy.DoAlgorithm(id);
 

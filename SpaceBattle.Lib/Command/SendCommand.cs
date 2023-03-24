@@ -15,12 +15,13 @@ public class SendCommand : ICommand
 
     public void Execute()
     {
-        ISender ?sender;
+        ISender? sender;
 
-        if(!(IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap").TryGetValue(_id, out sender)))
+        if (!(IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap").TryGetValue(_id, out sender)))
         {
             throw new Exception();
         }
+
         sender.Send(_message);
     }
 }

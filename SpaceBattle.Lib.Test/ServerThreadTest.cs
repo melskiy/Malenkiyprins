@@ -19,7 +19,7 @@ public class ServerThreadTests
     }
 
     [Fact]
-    public void SuccessfulCreateStartAndHardStopServerThreadWithoutParamsForStrategies()
+    public void SuccessfulCreateStartServerThreadWithoutParamsForStrategies()
     {
         var isActive = false;
 
@@ -34,7 +34,7 @@ public class ServerThreadTests
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
         {
             isActive = true;
             cv.Set();
@@ -75,7 +75,7 @@ public class ServerThreadTests
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
         {
             isActive = true;
             cv.Set();
@@ -159,7 +159,7 @@ public class ServerThreadTests
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
         {
             new InitScopeBasedIoCImplementationCommand().Execute();
             IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
