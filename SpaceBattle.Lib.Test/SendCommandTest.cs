@@ -7,8 +7,8 @@ namespace SpaceBattle.Lib.Test;
 public class SendCommandTest
 {
 
-    ConcurrentDictionary<int, ServerThread> thradMap = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<string, ServerThread> thradMap = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
     public SendCommandTest()
     {
@@ -21,8 +21,8 @@ public class SendCommandTest
     [Fact]
     public void UnsuccessfullSendCommandTestThrowsException()
     {
-        var id = 1;
-        var falseid = 3;
+        var id = "1";
+        var falseid = "3";
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 

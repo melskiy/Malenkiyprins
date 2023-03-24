@@ -6,7 +6,7 @@ public class SoftStopServerThreadCommandStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
-        var id = (int)args[0];
+        var id = (string)args[0];
         var action = () => {};
         if (args.Length == 2)
         {
@@ -15,7 +15,7 @@ public class SoftStopServerThreadCommandStrategy : IStrategy
 
 
         ServerThread? serverThread;
-        if (!(IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
+        if (!(IoC.Resolve<ConcurrentDictionary<string, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
         {
             throw new Exception();
         }

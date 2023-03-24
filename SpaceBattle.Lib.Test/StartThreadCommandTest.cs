@@ -6,8 +6,8 @@ namespace SpaceBattle.Lib.Test;
 
 public class StartTreadCommandTest
 {
-    ConcurrentDictionary<int, ServerThread> threadMap = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<string, ServerThread> threadMap = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
     public StartTreadCommandTest()
     {
@@ -21,8 +21,8 @@ public class StartTreadCommandTest
     [Fact]
     public void UnsuccessfulStartTreadCommandThrowExeption()
     {
-        var id = 9;
-        var falseid = 10;
+        var id = "9";
+        var falseid = "10";
 
         var cv = new AutoResetEvent(false);
 

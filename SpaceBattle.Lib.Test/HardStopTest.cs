@@ -6,8 +6,8 @@ namespace SpaceBattle.Lib.Test;
 
 public class HardStopTest
 {
-    ConcurrentDictionary<int, ServerThread> mapServerThreads = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> mapServerThreadsSenders = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<string, ServerThread> mapServerThreads = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> mapServerThreadsSenders = new ConcurrentDictionary<string, ISender>();
 
     public HardStopTest()
     {
@@ -20,8 +20,8 @@ public class HardStopTest
     [Fact]
     public void UnsuccessfulHardStopServerThreadStrategyDoAldorithmThrowsException()
     {
-        var id = 1;
-        var falseid = 4;
+        var id = "1";
+        var falseid = "4";
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
@@ -43,7 +43,7 @@ public class HardStopTest
     [Fact]
     public void UnsuccessfulHardStopServerThreadCommandExecuteThrowsException()
     {
-        var id = 5;
+        var id = "5";
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 

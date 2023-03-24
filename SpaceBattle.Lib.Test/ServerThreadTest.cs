@@ -6,8 +6,8 @@ namespace SpaceBattle.Lib.Test;
 
 public class ServerThreadTests
 {
-    ConcurrentDictionary<int, ServerThread> threadMap = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<string, ServerThread> threadMap = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
     public ServerThreadTests()
     {
@@ -23,7 +23,7 @@ public class ServerThreadTests
     {
         var isActive = false;
 
-        var id = 1;
+        var id = "1";
 
         var cv = new AutoResetEvent(false);
 
@@ -62,7 +62,7 @@ public class ServerThreadTests
         var createAndStartFlag = false;
         var hsFlag = false;
 
-        var id = 2;
+        var id = "2";
         var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
@@ -148,7 +148,7 @@ public class ServerThreadTests
         var cmd = new Mock<ICommand>();
         cmd.Setup(c => c.Execute()).Callback(() => throw new Exception());
 
-        var id = 11;
+        var id = "11";
         var cv = new AutoResetEvent(false);
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();

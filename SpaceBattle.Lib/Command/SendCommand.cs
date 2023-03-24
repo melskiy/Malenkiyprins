@@ -4,10 +4,10 @@ using System.Collections.Concurrent;
 
 public class SendCommand : ICommand
 {
-    private int _id;
+    private string _id;
     private ICommand _message;
 
-    public SendCommand(int id, ICommand message)
+    public SendCommand(string id, ICommand message)
     {
         _id = id;
         _message = message;
@@ -17,7 +17,7 @@ public class SendCommand : ICommand
     {
         ISender? sender;
 
-        if (!(IoC.Resolve<ConcurrentDictionary<int, ISender>>("SenderMap").TryGetValue(_id, out sender)))
+        if (!(IoC.Resolve<ConcurrentDictionary<string, ISender>>("SenderMap").TryGetValue(_id, out sender)))
         {
             throw new Exception();
         }

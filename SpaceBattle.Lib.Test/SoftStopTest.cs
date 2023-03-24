@@ -7,8 +7,8 @@ namespace SpaceBattle.Lib.Test;
 public class SoftStopTest
 {
 
-    ConcurrentDictionary<int, ServerThread> threadMap = new ConcurrentDictionary<int, ServerThread>();
-    ConcurrentDictionary<int, ISender> senderMap = new ConcurrentDictionary<int, ISender>();
+    ConcurrentDictionary<string, ServerThread> threadMap = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
     public SoftStopTest()
     {
@@ -22,7 +22,7 @@ public class SoftStopTest
     [Fact]
     public void SuccessfulSoftStopCommand()
     {
-        var id = 5;
+        var id = "5";
         var ssFlag = false;
         var cv = new AutoResetEvent(false);
 
@@ -50,7 +50,7 @@ public class SoftStopTest
     [Fact]
     public void UnsuccessfulSoftStopCommandStrategyThrowException()
     {
-        var id = 6;
+        var id = "6";
         var ssFlag = false;
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
@@ -82,8 +82,8 @@ public class SoftStopTest
     [Fact]
     public void UnsuccessfulStopStopServerThreadStrategyThrowsException()
     {
-        var id = 1;
-        var falseid = 4;
+        var id = "1";
+        var falseid = "4";
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
@@ -106,7 +106,7 @@ public class SoftStopTest
     [Fact]
     public void SuccessfulSoftStopCommandWithOtherCommands()
     {
-        var id = 9;
+        var id = "9";
         var isExecute = false;
 
 

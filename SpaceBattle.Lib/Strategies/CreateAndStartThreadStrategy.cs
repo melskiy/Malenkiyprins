@@ -4,7 +4,7 @@ public class CreateAndStartThreadStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
-        var id = (int)args[0];
+        var id = (string)args[0];
         var action = () => {};
 
         if (args.Length == 2)
