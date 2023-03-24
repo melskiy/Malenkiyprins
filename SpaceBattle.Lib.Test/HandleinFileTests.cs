@@ -11,7 +11,7 @@ public class HandlerWrFileStrategyTests
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
         var listoftypes = new List<Type> { typeof(string), typeof(int), typeof(DateTime) };
-        var path = "../../../logs/";
+        var path = "../../../";
         var cmdeshka = new HandlerWrFileCommand(listoftypes,path);
 
         cmdeshka.Execute();
