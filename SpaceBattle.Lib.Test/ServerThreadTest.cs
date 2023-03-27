@@ -4,18 +4,21 @@ using System.Collections.Concurrent;
 
 namespace SpaceBattle.Lib.Test;
 
-public class ServerThreadTests
+public class ServerThreadTest
 {
     ConcurrentDictionary<string, ServerThread> threadMap = new ConcurrentDictionary<string, ServerThread>();
     ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
-    public ServerThreadTests()
+    public ServerThreadTest()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-
+        var gtftm = new GetThreadFromThreadMapStrategy();
+        var gsfsm = new GetSenderFromSenderMapStrategy();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => threadMap).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetThreadFromThreadMap", (object[] args) => gtftm.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetSenderFromSenderMap", (object[] args) => gsfsm.DoAlgorithm(args)).Execute();
     }
 
     [Fact]
@@ -30,12 +33,13 @@ public class ServerThreadTests
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
         var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
+
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
-        {
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
+        {   
             isActive = true;
             cv.Set();
         }));
@@ -75,7 +79,7 @@ public class ServerThreadTests
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             isActive = true;
             cv.Set();
@@ -153,18 +157,25 @@ public class ServerThreadTests
 
         IStrategy createAndStartSTStrategy = new CreateAndStartThreadStrategy();
 
+
         var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
 
         c.Execute();
 
         var sendStrategy = new SendCommandStrategy();
 
-        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
-        {
+        var c1 = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
+        {   
             new InitScopeBasedIoCImplementationCommand().Execute();
             IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+            var gtftm = new GetThreadFromThreadMapStrategy();
+            var gsfsm = new GetSenderFromSenderMapStrategy();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => threadMap).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetThreadFromThreadMap", (object[] args) => gtftm.DoAlgorithm(args)).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetSenderFromSenderMap", (object[] args) => gsfsm.DoAlgorithm(args)).Execute();
             var handler = new Mock<ICommand>();
-            handler.Setup(c => c.Execute()).Callback(() => cv.Set());
+            handler.Setup(h => h.Execute()).Callback(() =>  cv.Set());
             IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "FindHandlerStrategy", (object[] args) => handler.Object).Execute();
             handleFlag = true;
             cmd.Object.Execute();

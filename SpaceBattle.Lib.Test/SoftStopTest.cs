@@ -14,9 +14,12 @@ public class SoftStopTest
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-
+        var gtftm = new GetThreadFromThreadMapStrategy();
+        var gsfsm = new GetSenderFromSenderMapStrategy();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => threadMap).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetThreadFromThreadMap", (object[] args) => gtftm.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetSenderFromSenderMap", (object[] args) => gsfsm.DoAlgorithm(args)).Execute();
     }
 
     [Fact]
@@ -121,7 +124,7 @@ public class SoftStopTest
         var ss = (ICommand)softStopStrategy.DoAlgorithm(id);
         ss.Execute();
 
-        var c = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand((object[] args) =>
+        var c = (ICommand)sendStrategy.DoAlgorithm(id, new ActionCommand(() =>
         {
             isExecute = true;
             cv.Set();

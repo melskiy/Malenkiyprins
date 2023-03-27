@@ -6,16 +6,19 @@ namespace SpaceBattle.Lib.Test;
 
 public class HardStopTest
 {
-    ConcurrentDictionary<string, ServerThread> mapServerThreads = new ConcurrentDictionary<string, ServerThread>();
-    ConcurrentDictionary<string, ISender> mapServerThreadsSenders = new ConcurrentDictionary<string, ISender>();
+    ConcurrentDictionary<string, ServerThread> threadMap = new ConcurrentDictionary<string, ServerThread>();
+    ConcurrentDictionary<string, ISender> senderMap = new ConcurrentDictionary<string, ISender>();
 
     public HardStopTest()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => mapServerThreads).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => mapServerThreadsSenders).Execute();
+        var gtftm = new GetThreadFromThreadMapStrategy();
+        var gsfsm = new GetSenderFromSenderMapStrategy();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "ThreadMap", (object[] args) => threadMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SenderMap", (object[] args) => senderMap).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetThreadFromThreadMap", (object[] args) => gtftm.DoAlgorithm(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetSenderFromSenderMap", (object[] args) => gsfsm.DoAlgorithm(args)).Execute();
     }
     [Fact]
     public void UnsuccessfulHardStopServerThreadStrategyDoAldorithmThrowsException()
@@ -50,7 +53,7 @@ public class HardStopTest
         var c = (ICommand)createAndStartSTStrategy.DoAlgorithm(id);
         c.Execute();
 
-        var serverThread = mapServerThreads[id];
+        var serverThread = threadMap[id];
 
         var hs = new HardStopServerThreadCommand(serverThread);
 

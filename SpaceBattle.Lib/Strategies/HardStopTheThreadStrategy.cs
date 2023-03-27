@@ -1,6 +1,5 @@
 namespace SpaceBattle.Lib;
 using Hwdtech;
-using System.Collections.Concurrent;
 
 public class HardStopServerThreadCommandStrategy : IStrategy
 {
@@ -14,16 +13,9 @@ public class HardStopServerThreadCommandStrategy : IStrategy
             action = (Action)args[1];
         }
 
-        ServerThread? serverThread;
+        var cmd = new HardStopServerThreadCommand(IoC.Resolve<ServerThread>("GetThreadFromThreadMap", id));
 
-        if (!(IoC.Resolve<ConcurrentDictionary<string, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
-        {
-            throw new Exception();
-        }
-
-        var cmd = new HardStopServerThreadCommand(serverThread);
-
-        return new SendCommand(id, new ActionCommand((object[] args) =>
+        return new SendCommand(IoC.Resolve<ISender>("GetSenderFromSenderMap", id), new ActionCommand(() =>
         {
             cmd.Execute(); action();
         }));

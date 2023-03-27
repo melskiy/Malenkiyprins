@@ -1,29 +1,22 @@
 namespace SpaceBattle.Lib;
 using Hwdtech;
-using System.Collections.Concurrent;
 
 public class SoftStopServerThreadCommandStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
         var id = (string)args[0];
-        var action = () => {};
+        var action = () => { };
         if (args.Length == 2)
         {
             action = (Action)args[1];
         }
 
+        var cmd = new SoftStopServerThreadCommand(IoC.Resolve<ServerThread>("GetThreadFromThreadMap", id), action);
 
-        ServerThread? serverThread;
-        if (!(IoC.Resolve<ConcurrentDictionary<string, ServerThread>>("ThreadMap").TryGetValue(id, out serverThread)))
+        return new SendCommand(IoC.Resolve<ISender>("GetSenderFromSenderMap", id), new ActionCommand(() =>
         {
-            throw new Exception();
-        }
-
-        var cmd = new SoftStopServerThreadCommand(serverThread, action);
-
-        return new SendCommand(id, new ActionCommand((object[] args) => {
             cmd.Execute();
-        })); 
+        }));
     }
 }

@@ -12,7 +12,7 @@ public class CreateAndStartThreadStrategy : IStrategy
             action = (Action)args[1];
         }
 
-        return new ActionCommand((object[] args) =>
+        return new ActionCommand(() =>
         {
             new CreateThreadCommand(id).Execute();
             new StartThreadCommand(id).Execute();

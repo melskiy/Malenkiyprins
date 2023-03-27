@@ -7,6 +7,8 @@ public class SendCommandStrategy : IStrategy
     {
         var id = (string)args[0];
         var message = (ICommand)args[1];
-        return new SendCommand(id, message);
+        var sender = IoC.Resolve<ISender>("GetSenderFromSenderMap", id);
+        
+        return new SendCommand(sender, message);
     }
 }
