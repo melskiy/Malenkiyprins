@@ -83,7 +83,7 @@ public class SoftStopTest
     }
 
     [Fact]
-    public void UnsuccessfulStopStopServerThreadStrategyThrowsException()
+    public void UnsuccessfulSoftStopServerThreadStrategyThrowsException()
     {
         var id = "1";
         var falseid = "4";
@@ -106,6 +106,7 @@ public class SoftStopTest
 
         hs.Execute();
     }
+    
     [Fact]
     public void SuccessfulSoftStopCommandWithOtherCommands()
     {
