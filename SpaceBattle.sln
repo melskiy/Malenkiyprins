@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceBattle.Lib", "SpaceBat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceBattle.Lib.Test", "SpaceBattle.Lib.Test\SpaceBattle.Lib.Test.csproj", "{0AC411BA-39A2-44F1-A8CF-C44F013BDE6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreWCFDemoServer", "SpaceBattle.Lib.Server\CoreWCFDemoServer.csproj", "{02D6C9F1-C308-4868-A84F-1E1999E08642}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceBattle.Lib.Server", "SpaceBattle.Lib.Server\SpaceBattle.Lib.Server.csproj", "{02D6C9F1-C308-4868-A84F-1E1999E08642}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

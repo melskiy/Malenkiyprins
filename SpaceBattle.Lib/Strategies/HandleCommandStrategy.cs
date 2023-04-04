@@ -1,10 +1,10 @@
 namespace SpaceBattle.Lib;
 using Hwdtech;
 
-public class HttpCommandStrategy : IStrategy
+public class HandleCommandStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
-        return new HttpCommand((IMessage)args[0]);
+        return new HandleCommand((IMessage)args[0]);
     }
 }
