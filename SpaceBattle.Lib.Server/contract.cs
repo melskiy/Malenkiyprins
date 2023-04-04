@@ -4,7 +4,7 @@ using CoreWCF.OpenApi.Attributes;
 using SpaceBattle.Lib;
 namespace WebHttp
 {
-    [DataContract(Name = "ExampleContract", Namespace = "http://example.com")]
+    [DataContract(Name = "GameContract")]
     internal class GameContract:IMessage
     {
         [DataMember(Name = "OrderType")]
@@ -14,14 +14,14 @@ namespace WebHttp
 
         [DataMember(Name = "GameID")]
         [OpenApiProperty(Description = "id игры")]
-        public string GameID { get;set;}
+        public string GameID {get;set;}
 
         [DataMember(Name = "GameItemID")]
         [OpenApiProperty(Description = "id объекта")]
-        public string GameItemID { get; set; }
+        public string GameItemID {get;set;}
 
         [DataMember(Name = "Properties")]
         [OpenApiProperty(Description = "свойстав объекта")]
-        public IDictionary<string,object> Properties { get; set ;}
+        public IDictionary<string,object> Properties {get;set;}
     }
 }

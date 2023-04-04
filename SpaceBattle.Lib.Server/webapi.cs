@@ -3,11 +3,12 @@ using Hwdtech;
 
 namespace WebHttp;
 
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    internal class WebApi : IWebApi
+[ServiceBehavior(IncludeExceptionDetailInFaults = true)]
+internal class WebApi : IWebApi
+{
+    public string HttpCommand(GameContract param)
     {
-        public GameContract HttpCommand(GameContract param){
-            IoC.Resolve<ICommand>("HttpCommandStrategy", param).Execute();
-            return param;
-        }   
+        IoC.Resolve<ICommand>("HandleCommandStrategy", param).Execute();
+        return "ok";
     }
+}
