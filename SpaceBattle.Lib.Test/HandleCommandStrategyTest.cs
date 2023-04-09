@@ -2,10 +2,10 @@ using Hwdtech;
 using Hwdtech.Ioc;
 namespace SpaceBattle.Lib.Test;
 
-public class HttpTest
+public class HandleCommandStrategyTest
 {
     [Fact]
-    public void CreateHttpTest()
+    public void HandleCommandStrategyPositiveTest()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
 
