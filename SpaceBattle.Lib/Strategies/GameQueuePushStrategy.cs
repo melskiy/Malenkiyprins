@@ -1,4 +1,5 @@
 namespace SpaceBattle.Lib;
+using Hwdtech;
 
 public class GameQueuePushStrategy : IStrategy
 {
@@ -6,7 +7,8 @@ public class GameQueuePushStrategy : IStrategy
     {
         var id = (string)args[0];
         var cmd = (ICommand)args[1];
+        var queue = IoC.Resolve<Queue<ICommand>>("GetGameQueue", id);
 
-        return new GameQueuePushCommand(id, cmd);
+        return new GameQueuePushCommand(queue, cmd);
     }
 }

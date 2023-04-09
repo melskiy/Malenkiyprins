@@ -1,20 +1,19 @@
 namespace SpaceBattle.Lib;
-using Hwdtech;
 
 public class GameQueuePushCommand: ICommand
 {
-    string _id;
     ICommand _cmd;
 
-    public GameQueuePushCommand(string id, ICommand cmd)
+    Queue<ICommand> _queue;
+
+    public GameQueuePushCommand(Queue<ICommand> queue, ICommand cmd)
     {
-        _id = id;
+        _queue = queue;
         _cmd = cmd;
     }
 
     public void Execute()
     {
-        var queue = IoC.Resolve<Queue<ICommand>>("GetGameQueue", _id);
-        queue.Enqueue(_cmd);
+        _queue.Enqueue(_cmd);
     }
 }
