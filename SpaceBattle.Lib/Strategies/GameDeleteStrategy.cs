@@ -5,7 +5,6 @@ public class GameDeleteStrategy : IStrategy
 {
     public object DoAlgorithm(params object[] args)
     {
-       return new GameDeleteCommand((string)args[0]);
-            
+        return new GameDeleteCommand((string)args[0]);
     }
 }
