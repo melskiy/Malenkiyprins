@@ -15,7 +15,6 @@ public class GameScopeStrategyTest
         var mockStrategyReturnsDict2 = new Mock<IStrategy>();
         mockStrategyReturnsDict2.Setup(x => x.DoAlgorithm()).Returns(new Dictionary<string, object >());
 
-
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameScopeMap", (object[] args) =>  mockStrategyReturnsDict2.Object.DoAlgorithm(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameScopeStrategy", (object[] args) =>  new GameScopeStrategy().DoAlgorithm(args)).Execute();
         
