@@ -12,7 +12,8 @@ public class DeleteUObjectFromObjectMapCommandTest
 
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-        
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetUObjects", (object[] args) => objMap).Execute();
+
         var id = "1";
 
         var strategy = new GetUObjectFromObjectMapStrategy();
