@@ -7,7 +7,6 @@ public class GameQueuePopStrategy : IStrategy
     {
         var id = (string)args[0];
         var queue = IoC.Resolve<Queue<ICommand>>("GetGameQueue", id);
-
-        return new GameQueuePopCommand(queue);
+        return  queue.Dequeue();
     }
 }

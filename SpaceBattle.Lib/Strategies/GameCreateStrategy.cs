@@ -20,7 +20,6 @@ public class GameCreateStrategy : IStrategy
 
         GameCommandMap.Add(gameid, inject_command);
 
-
         return inject_command;
     }
 }

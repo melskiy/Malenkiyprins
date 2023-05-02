@@ -27,10 +27,9 @@ public class GameQueuePopStrategyTest
 
         var gameQueuePopStrategy = new GameQueuePopStrategy();
 
-        var c = (Lib.ICommand)gameQueuePopStrategy.DoAlgorithm("1");
-        c.Execute();
+        var pop = gameQueuePopStrategy.DoAlgorithm("1",queue);
         Assert.Empty(IoC.Resolve<Queue<ICommand>>("GetGameQueue", "1"));
-
+        cmd.Equals(pop);
     }
 
 }
