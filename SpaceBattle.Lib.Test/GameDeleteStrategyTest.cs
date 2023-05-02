@@ -25,7 +25,7 @@ public class GameDeleteStrategyTest
         mockStrategyReturnsDict.Setup(x => x.DoAlgorithm()).Returns(new Dictionary<string, SpaceBattle.Lib.Iinjectable > { { "0", mockInject.Object} });
 
         var mockStrategyReturnsDict2 = new Mock<IStrategy>();
-        mockStrategyReturnsDict2.Setup(x => x.DoAlgorithm()).Returns(new Dictionary<string, object > { { "0",  IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root")))} });
+        mockStrategyReturnsDict2.Setup(x => x.DoAlgorithm()).Returns(new Dictionary<string, object > { { "0",  IoC.Resolve<object>("Scopes.Root")} });
 
         var mockStrategyReturnEmpty = new Mock<IStrategy>();
         mockStrategyReturnEmpty.Setup(x => x.DoAlgorithm()).Returns(mockCommand.Object);
