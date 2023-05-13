@@ -22,6 +22,6 @@ public class ArrangeTheShipsCommand : ICommand
             IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[i], "position", position).Execute();
             newpos.MoveNext();
         }
-
+         newpos.Reset();
     }
 }
