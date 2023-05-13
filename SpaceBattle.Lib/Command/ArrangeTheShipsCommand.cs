@@ -3,23 +3,25 @@ using Hwdtech;
 
 public class ArrangeTheShipsCommand : ICommand
 {
-    private IList<string> listship;
-    private IList<string> listenemy;
-    public ArrangeTheShipsCommand(IList<string> listship, IList<string> listenemy)
+    private IList<string> ships;
+    public ArrangeTheShipsCommand(IList<string> ships)
     {
-        this.listship = listship;
-        this.listenemy = listenemy;
+        this.ships = ships;
     }
     public void Execute()
     {
         var delta = IoC.Resolve<int>("DistanceBetwinShips");
         var map = IoC.Resolve<IDictionary<string, IUObject>>("GetUObjects");
+        var corrent = IoC.Resolve<int>("GetCurrentShip");
+        Vector position = new Vector(0, 0);
+        var newpos = new PositionEnumerator();
 
-        listenemy.ToList().ForEach(
-         x =>
-         {
-             IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[x], "position", (Vector)(map[listship[listenemy.IndexOf(x)]].getProperty("position")) + new Vector(new int[2] { delta, 0 })).Execute();
-         });
+        foreach (var i in ships)
+        {
+            position = (Vector)newpos.Current;
+            IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[i], "position", newpos).Execute();
+            newpos.MoveNext();
+        }
 
     }
 }
