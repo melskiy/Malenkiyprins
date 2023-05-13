@@ -19,7 +19,7 @@ public class ArrangeTheShipsCommand : ICommand
         foreach (var i in ships)
         {
             position = (Vector)newpos.Current;
-            IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[i], "position", newpos).Execute();
+            IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[i], "position", position).Execute();
             newpos.MoveNext();
         }
 
