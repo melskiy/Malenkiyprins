@@ -28,7 +28,7 @@ public class ArrangeTheShipsCommandTest
         };
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetUObjects", (object[] args) => StrategyReturnsDict).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetShipPositions", (object[] args) => new List<Vector>(){new Vector(new int[]{0,1}),new Vector(new int[]{0,1})}).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetShipPositions", (object[] args) => new List<Vector>(){new Vector(new int[]{0,1}),new Vector(new int[]{0,1}),new Vector(new int[]{0,1})}).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameUObjectSetPropertyStrategy", (object[] args) => new GameUObjectSetPropertyStrategy().DoAlgorithm(args)).Execute();
         var cmd = new ArrangeTheShipsCommand( new List<string>() { "id3", "id4" });
 
