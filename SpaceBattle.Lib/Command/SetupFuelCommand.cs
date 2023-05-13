@@ -19,6 +19,5 @@ public class SetupFuelCommand : ICommand
             x => IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[x], "fuel",
                 listfuel[listship.IndexOf(x)]).Execute()
          );
-
     }
 }

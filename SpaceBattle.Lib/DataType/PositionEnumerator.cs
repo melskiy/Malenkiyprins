@@ -1,10 +1,10 @@
 using System.Collections;
 namespace SpaceBattle.Lib;
 using Hwdtech;
-class PositionEnumerator : IEnumerator
+public class PositionEnumerator : IEnumerator<object>
 {
     private IList<Vector> positions;
-    private int currentship; 
+    private int currentship;
     private int delta;
     public PositionEnumerator()
     {
@@ -16,18 +16,23 @@ class PositionEnumerator : IEnumerator
     {
         get
         {
-            return positions[this.currentship] + new Vector(new int[2]{delta,0});
+            return positions[this.currentship] + new Vector(new int[2] { delta, 0 });
         }
     }
+
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
+
     public bool MoveNext()
     {
-        if (this.currentship < positions.Count())
+        if (this.currentship < positions.Count() - 1)
         {
-            currentship++;
+            this.currentship++;
             return true;
         }
-        else
-            return false;
+        return false;
     }
-    public void Reset() => currentship = currentship +1;
+    public void Reset() => IoC.Resolve<ICommand>("SetCurrentShip", currentship + 1).Execute();
 }

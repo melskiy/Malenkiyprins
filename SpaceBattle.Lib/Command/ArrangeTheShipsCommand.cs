@@ -10,18 +10,11 @@ public class ArrangeTheShipsCommand : ICommand
     }
     public void Execute()
     {
-        var delta = IoC.Resolve<int>("DistanceBetwinShips");
-        var map = IoC.Resolve<IDictionary<string, IUObject>>("GetUObjects");
-        var corrent = IoC.Resolve<int>("GetCurrentShip");
-        Vector position = new Vector(0, 0);
-        var newpos = new PositionEnumerator();
-
+        var Enum = IoC.Resolve<IEnumerator<object>>("EnemiesPositionEnum");
         foreach (var i in ships)
         {
-            position = (Vector)newpos.Current;
-            IoC.Resolve<ICommand>("GameUObjectSetPropertyStrategy", map[i], "position", position).Execute();
-            newpos.MoveNext();
+            IoC.Resolve<ICommand>("SetEnemyPosition", Enum, i).Execute();
         }
-        newpos.Reset();
+        Enum.Reset();
     }
 }
