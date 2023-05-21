@@ -18,12 +18,12 @@ public class CreateCommandStrategyTests
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Adapter", (object[] args) => adapterStrategy.Object.DoAlgorithm(args)).Execute();
 
-        var createShootCommandStrategy = new CreateShootCommandStrategy();
+        var createShootCommandStrategy = new CreateShootOperationCommandStrategy();
         
         var cmd = createShootCommandStrategy.DoAlgorithm(obj.Object);
 
         Assert.NotNull(cmd);
-        Assert.True(cmd.GetType() == typeof(ShootCommand));
+        Assert.True(cmd.GetType() == typeof(ShootOperationCommand));
     }
 
     [Fact]

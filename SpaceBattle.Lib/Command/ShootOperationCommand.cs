@@ -1,10 +1,10 @@
 using Hwdtech;
 namespace SpaceBattle.Lib;
 
-public class ShootCommand : ICommand
+public class ShootOperationCommand : ICommand
 {
     private IShootable _shootable;
-    public ShootCommand(IShootable shootable)
+    public ShootOperationCommand(IShootable shootable)
     {
         _shootable = shootable;
     }
