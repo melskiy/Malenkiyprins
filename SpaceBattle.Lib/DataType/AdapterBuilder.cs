@@ -6,13 +6,13 @@ public class AdapterBuilder : IBuilder
 {
     private Type _type1;
     private Type _type2;
-    private string _template_text = @"public class {{a}}Adapter : {{a}}
+    private string _template_text = @"public class {{type2}}Adapter : {{type2}}
     {
-        private {{b}} obj;
+        private {{type1}} obj;
 
-        public {{a}}Adapter({{b}} obj) => this.obj = obj;
+        public {{type2}}Adapter({{type1}} obj) => this.obj = obj;
 
-        {{- for propInfo in (c)}}
+        {{- for propInfo in (props)}}
 
         public {{propInfo.property_type.name}} {{propInfo.name}}
         {
@@ -38,6 +38,6 @@ public class AdapterBuilder : IBuilder
 
     public string Build()
     {
-        return _template.Render(new { a = _type2.Name, b = _type1.Name, c = _props});
+        return _template.Render(new { type2 = _type2.Name, type1 = _type1.Name, props = _props});
     }
 }
