@@ -10,7 +10,7 @@ public class CodeStringGenerateStrategy: IStrategy
         var type2 = (Type)args[1];
         var builder = IoC.Resolve<IBuilder>("GetAdapterBuilder", type1, type2);
 
-        type2.GetProperties().ToList().ForEach(property => builder.AddProperty(property));
+        type2.GetProperties().ToList().ForEach(property => builder.AddMembers(property));
 
         return builder.Build();
     } 

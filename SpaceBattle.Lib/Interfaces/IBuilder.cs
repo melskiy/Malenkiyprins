@@ -4,5 +4,5 @@ public interface IBuilder
 {
 
     public string Build();
-    public void AddProperty(object property);
+    public void AddMembers(object member);
 }

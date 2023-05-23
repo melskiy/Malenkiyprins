@@ -14,7 +14,7 @@ public class CodeStringGenerateStrategyTest
 
         var adapterBuilder = new Mock<IBuilder>();
         adapterBuilder.Setup(c => c.Build()).Returns(str).Verifiable();
-        adapterBuilder.Setup(c => c.AddProperty(It.IsAny<object>())).Callback(() => {}).Verifiable();
+        adapterBuilder.Setup(c => c.AddMembers(It.IsAny<object>())).Callback(() => {}).Verifiable();
 
         var getAdapterBuilderStrategy = new Mock<IStrategy>();
         getAdapterBuilderStrategy.Setup(s => s.DoAlgorithm(It.IsAny<object[]>())).Returns(adapterBuilder.Object).Verifiable();

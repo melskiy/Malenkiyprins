@@ -31,7 +31,7 @@ public class AdapterBuilder : IBuilder
         _template = Template.Parse(_template_text);
     }
 
-    public void AddProperty(object property)
+    public void AddMembers(object property)
     {
         _props.Add((PropertyInfo)property);
     }

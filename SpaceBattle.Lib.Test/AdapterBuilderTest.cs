@@ -6,7 +6,7 @@ public class AdapterBuilderTestTest
     public void SuccessfulGetAdapterBuilderTest()
     {
         var adapterBuilder = new AdapterBuilder(typeof(IUObject), typeof(IMovable));
-        typeof(IMovable).GetProperties().ToList().ForEach(property => adapterBuilder.AddProperty(property));
+        typeof(IMovable).GetProperties().ToList().ForEach(property => adapterBuilder.AddMembers(property));
 
         var imovableAdapter = @"public class IMovableAdapter : IMovable
     {
