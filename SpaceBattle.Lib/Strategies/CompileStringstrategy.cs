@@ -11,7 +11,6 @@ public class CompileStringstrategy : IStrategy
     {
         string str = (string)args[0];
         var obj = (IUObject)args[1];
-        
 
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(str);
         Compilation compilation = CSharpCompilation.Create("DynamicAssembly")
