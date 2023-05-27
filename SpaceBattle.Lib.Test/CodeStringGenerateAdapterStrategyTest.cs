@@ -42,7 +42,7 @@ public class IMovableAdapter : IMovable
         var srtategy = new CreateadapterStrategy();
         var result = srtategy.DoAlgorithm(mockUObject.Object, typeof(IMovable));
         var code = result.ToString();
-        Assert.Equal(code,"SpaceBattle.Lib.IMovableAdapter");
+        Assert.Equal("SpaceBattle.Lib.IMovableAdapter",code);
         
     }
 }
