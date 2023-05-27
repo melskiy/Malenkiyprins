@@ -13,7 +13,7 @@ public class CodeStringGenerateAdapterCommand : ICommand
     }
     public void Execute()
     {
-        var Result = IoC.Resolve<object>("CompileStringstrategy", str, obj);
+        var Result = IoC.Resolve<object>("CompileStringstrategy", str, obj,type1);
 
         var adapterName = type1.ToString() + "Adapter";
 

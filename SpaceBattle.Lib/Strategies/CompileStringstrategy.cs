@@ -11,6 +11,7 @@ public class CompileStringstrategy : IStrategy
     {
         string str = (string)args[0];
         var obj = (IUObject)args[1];
+        
 
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(str);
         Compilation compilation = CSharpCompilation.Create("DynamicAssembly")
@@ -22,10 +23,11 @@ public class CompileStringstrategy : IStrategy
 
         using (var ms = new MemoryStream())
         {
+            var type1 = (Type)args[2];
             var result = compilation.Emit(ms);
             ms.Seek(0, SeekOrigin.Begin);
             var assembly = Assembly.Load(ms.ToArray());
-            var type = assembly.GetType("SpaceBattle.Lib.IMovableAdapter");
+            var type = assembly.GetType(type1.ToString() + "Adapter");
             var adapterInstance = Activator.CreateInstance(type!, obj);
             return adapterInstance!;
         }
