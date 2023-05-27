@@ -23,10 +23,7 @@ public class CompileStringstrategy : IStrategy
             var type1 = types;
             var result = compilation.Emit(ms);
             ms.Seek(0, SeekOrigin.Begin);
-            var assembly = Assembly.Load(ms.ToArray());
-            var type = assembly.GetType(type1.ToString() + "Adapter");
-            var adapterInstance = Activator.CreateInstance(type!, obj);
-            return adapterInstance!;
+            return ms;
         }
     }
 }

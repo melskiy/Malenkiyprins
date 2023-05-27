@@ -13,13 +13,11 @@ public class CodeStringGenerateAdapterCommand : ICommand
     }
     public void Execute()
     {
-        var Result = IoC.Resolve<object>("CompileStringstrategy", str, obj,type1);
-
+        var ms = IoC.Resolve<MemoryStream>("CompileStringstrategy", str, obj,type1);
         var adapterName = type1.ToString() + "Adapter";
-
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterName, (object[] args) => Result).Execute();
+        var map = IoC.Resolve<IDictionary<string,MemoryStream>>("GetMemoryStreammap");
+        map.Add(type1.ToString()+"Adapter",ms);
         var dic = IoC.Resolve<IDictionary<KeyValuePair<Type, Type>, string>>("CodeStringmap");
-
         dic.Add(new KeyValuePair<Type, Type>(obj.GetType(), type1), adapterName);
     }
 }

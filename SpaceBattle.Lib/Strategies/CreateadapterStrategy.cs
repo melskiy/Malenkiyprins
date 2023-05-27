@@ -13,8 +13,8 @@ public class CreateadapterStrategy : IStrategy
         {
             IoC.Resolve<ICommand>("CodeStringGenerateAdapter", str, type2, obj).Execute();
         }
-
-        return IoC.Resolve<object>(dic[key], obj, type2);
+        var adapter = IoC.Resolve<object>("FindAdapterStrategy",type2,obj);
+        return adapter;
     }
 
 }
