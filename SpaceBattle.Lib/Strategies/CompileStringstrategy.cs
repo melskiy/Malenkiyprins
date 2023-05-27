@@ -11,18 +11,16 @@ public class CompileStringstrategy : IStrategy
     {
         string str = (string)args[0];
         var obj = (IUObject)args[1];
-
+        var types = (Type)args[2];
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(str);
-        Compilation compilation = CSharpCompilation.Create("DynamicAssembly")
-                .AddReferences(
-                     IoC.Resolve<MetadataReference[]>("CompileReferences")
-    );
+        Compilation compilation = CSharpCompilation.Create(types.ToString() + "Adapter")
+        .AddReferences(IoC.Resolve<MetadataReference[]>("CompileReferences"));
         compilation = compilation.WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
-            .AddSyntaxTrees(syntaxTree);
+        .AddSyntaxTrees(syntaxTree);
 
         using (var ms = new MemoryStream())
         {
-            var type1 = (Type)args[2];
+            var type1 = types;
             var result = compilation.Emit(ms);
             ms.Seek(0, SeekOrigin.Begin);
             var assembly = Assembly.Load(ms.ToArray());
